@@ -3,15 +3,30 @@ import { Container, Segment, Label, Image } from 'semantic-ui-react';
 import { Helmet } from '@plone/volto/helpers';
 import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import { searchContent } from '@plone/volto/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const TalkListView = props => {
   const { content } = props;
-  const results = content.items;
+  const searchRequests = useSelector(state => state.search);
+  const dispatch = useDispatch();
+  const results = searchRequests.items;
+
   const color_mapping = {
     Beginner: 'green',
     Advanced: 'yellow',
     Professionals: 'red',
   };
+
+  React.useEffect(() => {
+    dispatch(
+      searchContent('/', {
+        portal_type: ['Talk'],
+        fullobjects: true,
+      }),
+    );
+  }, [dispatch]);
+
   return (
     <Container className="view-wrapper">
       <Helmet title={content.title} />
@@ -60,4 +75,5 @@ const TalkListView = props => {
     </Container>
   );
 };
+
 export default TalkListView;
