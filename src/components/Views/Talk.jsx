@@ -1,6 +1,7 @@
 import React from 'react';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { Container, Image, Icon, Label, Segment } from 'semantic-ui-react';
+import { Helmet } from '@plone/volto/helpers';
 
 const TalkView = props => {
   const { content } = props;
@@ -12,6 +13,7 @@ const TalkView = props => {
 
   return (
     <Container id="page-talk">
+      <Helmet title={content.title} />
       <h1 className="documentFirstHeading">
         {content.type_of_talk.title}: {content.title}
       </h1>
