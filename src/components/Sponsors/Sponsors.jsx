@@ -8,29 +8,39 @@ import { searchContent } from '@plone/volto/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, List, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
+import { getQueryStringResults } from '@plone/volto/actions';
 
 /**
  * Component to display the sponsors.
  * @function Sponsors
- * @param {Object} intl Intl object
  * @returns {string} Markup of the component
  */
 
-const Sponsors = props => {
-  const searchSubrequests = useSelector(state => state.search);
+const Sponsors = () => {
+  // get / listen search result from store
+  const querystringResults = useSelector(
+    state => state.querystringsearch.subrequests,
+  );
   const dispatch = useDispatch();
-  const results = searchSubrequests?.items;
 
   React.useEffect(() => {
+    const options = {
+        query: [
+          {
+            i: 'portal_type',
+            o: 'plone.app.querystring.operation.selection.any',
+            v: ['sponsor']
+          }
+        ]
+      };
     dispatch(
-      searchContent('/', {
-        sort_on: 'created',
-        metadata_fields: '_all',
-        portal_type: ['sponsor'],
-      }),
+      getQueryStringResults('/', options, 'sponsors'),
     );
   }, [dispatch]);
+
+  const results =
+    querystringResults['sponsors'] && querystringResults['sponsors'].items || [];
 
   return (
     <Segment vertical padded>
@@ -41,7 +51,9 @@ const Sponsors = props => {
             {results &&
               results.map(sponsor => (
                 <li key={sponsor['@id']}>
-                  <Link to={sponsor['@id']}>{sponsor.title}</Link>
+                  <Link to={sponsor['@id']}>
+                    {sponsor.title} <b>{sponsor.level?.title}</b>
+                  </Link>
                 </li>
               ))}
           </ul>
@@ -50,5 +62,9 @@ const Sponsors = props => {
     </Segment>
   );
 };
+
+// Sponsors.propTypes = {
+//   piep: PropTypes.string.isRequired,
+// };
 
 export default Sponsors;
