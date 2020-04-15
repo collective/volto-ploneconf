@@ -12,3 +12,4 @@ import TalkView from './Views/Talk';
 import TalkListView from './Views/TalkList';
 
 export { TalkView, TalkListView };
+export Sponsors from './Sponsors/Sponsors';

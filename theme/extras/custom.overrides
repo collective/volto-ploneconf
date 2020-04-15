@@ -1,0 +1,57 @@
+// Footer
+.ui.horizontal.list.siteactions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    line-height: 1.2em;
+  }
+}
+
+// Sponsors
+.ui.segment.sponsors {
+  background-color: lighten(#68778D, 40%);
+  box-shadow: rgba(153, 153, 153, 0.3) 0px 6px 24px 0px;
+  .sponsorheader {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    align-items: baseline;
+    justify-content: center;
+    .headline {
+      margin: 0 0 0 1em;;
+    }
+    .subheadline {
+      margin: 0;
+    }
+  }
+  .sponsorlevel {
+    margin-top: 1rem;
+    display: flex;
+    h3 {
+      writing-mode: sideways-lr;
+      margin: 0 1em 0 0;
+      font-size: 1rem;
+      letter-spacing: .2em;
+    }
+    div.list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      .sponsor {
+        height: 6rem;
+        margin: 0 1rem .5rem 0;
+        .logo {
+          height: 100%;
+          width: auto;
+          img {
+            height: 100%;
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+
+}

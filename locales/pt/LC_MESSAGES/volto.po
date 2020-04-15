@@ -1,6 +1,6 @@
 # Translators:
 # Emanuel de Jesus <emanuel.angelo@gmail.com>, 2019
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
@@ -18,3 +18,51 @@ msgstr ""
 "Language-Code: pt\n"
 "Language-Name: Portuguese\n"
 "Preferred-Encodings: utf-8\n"
+
+#: customizations/components/theme/Footer/Footer
+msgid "Accessibility"
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "Contact"
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "Copyright"
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "Distributed under the {license}."
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "GNU GPL license"
+msgstr ""
+
+#: components/Sponsors/SponsorsBody
+msgid "Our sponsors do support and are supported of Plone."
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "Plone Foundation"
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "Plone{reg} Open Source CMS/WCM"
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "Powered by Plone & Python"
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "Site Map"
+msgstr ""
+
+#: customizations/components/theme/Footer/Footer
+msgid "The {plonecms} is {copyright} 2000-{current_year} by the {plonefoundation} and friends."
+msgstr ""
+
+#: components/Sponsors/SponsorsBody
+msgid "We ❤ our sponsors"
+msgstr ""
