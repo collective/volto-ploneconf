@@ -3,68 +3,105 @@
  * @module components/theme/Footer/Sponsors
  */
 
-import React from 'react';
-import { searchContent } from '@plone/volto/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { Container, List, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { asyncConnect } from 'redux-connect';
+import { compose } from 'redux';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+
 import { getQueryStringResults } from '@plone/volto/actions';
+
+import SponsorsBody from './SponsorsBody';
+
+const toSearchOptions = {
+  query: [
+    {
+      i: 'portal_type',
+      o: 'plone.app.querystring.operation.selection.any',
+      v: ['sponsor'],
+    },
+  ],
+};
 
 /**
  * Component to display the sponsors.
- * @function Sponsors
- * @returns {string} Markup of the component
+ * @class Sponsors
+ * @extends Component
  */
 
-const Sponsors = () => {
-  // get / listen search result from store
-  const querystringResults = useSelector(
-    state => state.querystringsearch.subrequests,
-  );
-  const dispatch = useDispatch();
+class Sponsors extends Component {
+  /**
+   * Property types.
+   * @property {Object} propTypes Property types.
+   * @static
+   */
+  static propTypes = {
+    getQueryStringResults: PropTypes.func.isRequired,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        '@id': PropTypes.string,
+        '@type': PropTypes.string,
+        title: PropTypes.string,
+        description: PropTypes.string,
+      }),
+    ),
+  };
 
-  React.useEffect(() => {
-    const options = {
-        query: [
-          {
-            i: 'portal_type',
-            o: 'plone.app.querystring.operation.selection.any',
-            v: ['sponsor']
-          }
-        ]
-      };
-    dispatch(
-      getQueryStringResults('/', options, 'sponsors'),
-    );
-  }, [dispatch]);
+  /**
+   * Default properties.
+   * @property {Object} defaultProps Default properties.
+   * @static
+   */
+  static defaultProps = {
+    items: [],
+  };
 
-  const results =
-    querystringResults['sponsors'] && querystringResults['sponsors'].items || [];
+  /**
+   * Component will mount
+   * @method componentWillMount
+   * @returns {undefined}
+   */
+  UNSAFE_componentWillMount() {
+    // call action getQueryStringResults
+    this.props.getQueryStringResults('/', {...toSearchOptions, fullobjects: 1}, 'sponsors');
+  }
 
-  return (
-    <Segment vertical padded>
-      <Container>
-        <Segment basic>
-          <h3>We ❤ our sponsors</h3>
-          <ul>
-            {results &&
-              results.map(sponsor => (
-                <li key={sponsor['@id']}>
-                  <Link to={sponsor['@id']}>
-                    {sponsor.title} <b>{sponsor.level?.title}</b>
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </Segment>
-      </Container>
-    </Segment>
-  );
-};
+  /**
+   * Render method.
+   * @method render
+   * @returns {string} Markup for the component.
+   */
+  render() {
+    return (
+      <>
+       <SponsorsBody sponsorlist={this.props.items} />
+      </>
+  )}
+}
 
-// Sponsors.propTypes = {
-//   piep: PropTypes.string.isRequired,
-// };
+export default compose(
+  injectIntl,
+  connect(
+    state => ({
+      // TODO: why is state.querystringsearch.subrequests.sponsors undefined?
+      items: state.querystringsearch.subrequests.sponsors?.items || [],
+    }),
+    { getQueryStringResults },
+  ),
 
-export default Sponsors;
+  asyncConnect([
+    {
+      key: 'querystringsearch',
+      promise: ({ store: { dispatch } }) =>
+        dispatch(
+          getQueryStringResults(
+            '/',
+            {...toSearchOptions, fullobjects: 1},
+            'sponsors'
+          ),
+        ),
+    },
+  ]),
+
+)(Sponsors);

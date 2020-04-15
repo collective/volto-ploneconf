@@ -25,17 +25,18 @@ const messages = defineMessages({
  */
 const Footer = ({ intl }) => (
   <>
-    <Sponsors />
     <Segment
       role="contentinfo"
       vertical
       padded
-      inverted
-      color="grey"
-      textAlign="center"
     >
       <Container>
-        <Segment basic inverted color="grey" className="discreet">
+        <Sponsors />
+        <Segment basic
+        inverted
+        color="grey"
+        textAlign="center"
+        className="discreet">
           <FormattedMessage
             id="The {plonecms} is {copyright} 2000-{current_year} by the {plonefoundation} and friends."
             defaultMessage="The {plonecms} is {copyright} 2000-{current_year} by the {plonefoundation} and friends."
@@ -79,7 +80,12 @@ const Footer = ({ intl }) => (
             }}
           />
         </Segment>
-        <List horizontal inverted>
+        <List
+          className="siteactions"
+          horizontal
+          relaxed
+          celled
+          >
           {/* wrap in div for a11y reasons: listitem role cannot be on the <a> element directly */}
           <div role="listitem" className="item">
             <Link className="item" to="/sitemap">
