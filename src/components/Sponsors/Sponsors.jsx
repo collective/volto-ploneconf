@@ -73,9 +73,10 @@ class Sponsors extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    const sponsorlist = this.props.items;
     return (
       <>
-       <SponsorsBody sponsorlist={this.props.items} />
+       <SponsorsBody sponsorlist={sponsorlist} />
       </>
   )}
 }

@@ -29,8 +29,8 @@ body.userrole-reviewer {
 
 // Sponsors
 .ui.segment.sponsors {
-  background-color: lighten(#68778d, 40%);
-  box-shadow: rgba(153, 153, 153, 0.3) 0px 6px 24px 0px;
+  background-color: lighten(#68778D, 40%);
+  box-shadow: 0px 6px 24px 0px rgba(153, 153, 153, 0.3);
   .sponsorheader {
     display: flex;
     flex-wrap: wrap;
@@ -48,7 +48,7 @@ body.userrole-reviewer {
     margin-top: 1rem;
     display: flex;
     h3 {
-      writing-mode: sideways-lr;
+      writing-mode: vertical-lr;
       margin: 0 1em 0 0;
       font-size: 1rem;
       letter-spacing: 0.2em;

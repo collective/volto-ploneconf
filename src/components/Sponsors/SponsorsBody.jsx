@@ -12,46 +12,45 @@ const LevelVocabulary = {
   'bronze': 'Bronze Sponsor',
 }
 
-function groupedSponsors(sponsorlist) {
-  let result = {}
-  for (const level in LevelVocabulary) {
-    result[level] = sponsorlist.filter(el => el.level.token == level)
-  };
-  return result
-}
-
-function LevelList({sponsors, level}) {
-    if (sponsors && sponsors[level[0]] !== undefined && sponsors[level[0]].length>0) {
-      return (
-        <List.Item key={level[0]} className="sponsorlevel">
-          <h3>{level[0].toUpperCase()}</h3>
-          <List horizontal>
-            {sponsors[level[0]] && sponsors[level[0]].map(item => (
-              <List.Item key={item['UID']} className="sponsor">
-                {item.logo && (
-                  <Image
-                    className="logo"
-                    src={flattenToAppURL(item.logo.scales.preview.download)}
-                    size="small"
-                    alt={item.title}
-                    title={item.level?.title + ' ' + item.title}
-                  />
-                )}
-              </List.Item>
-            ))}
-          </List>
-        </List.Item>
-      )}
-
-    return null;
-}
 
 const SponsorsBody = ({sponsorlist}) => {
-  const [sponsors, setSponsors] = useState({});
 
-  useEffect(() => {
-    setSponsors(groupedSponsors(sponsorlist));
-  }, [sponsorlist])
+  const groupedSponsors = (sponsorlist) => {
+    let result = {}
+    for (const level in LevelVocabulary) {
+      result[level] = sponsorlist.filter(el => el.level.token == level)
+    };
+    return result
+  }
+
+  const sponsors = groupedSponsors(sponsorlist);
+
+  const levelList = level => {
+      if (sponsors && sponsors[level[0]] !== undefined && sponsors[level[0]].length>0) {
+        return (
+          <List.Item key={level[0]} className="sponsorlevel">
+            <h3>{level[0].toUpperCase()}</h3>
+            <List horizontal>
+              {sponsors[level[0]] && sponsors[level[0]].map(item => (
+                <List.Item key={item['UID']} className="sponsor">
+                  {item.logo && (
+                    <Image
+                      className="logo"
+                      src={flattenToAppURL(item.logo.scales.preview.download)}
+                      size="small"
+                      alt={item.title}
+                      title={item.level?.title + ' ' + item.title}
+                    />
+                  )}
+                </List.Item>
+              ))}
+            </List>
+          </List.Item>
+        )}
+
+      return null;
+  }
+
 
   return (
     <Segment
@@ -76,7 +75,7 @@ const SponsorsBody = ({sponsorlist}) => {
       </div>
       <List>
         {sponsors && Object.entries(LevelVocabulary).map(level => (
-          <LevelList sponsors={sponsors} level={level} key={level}/>
+          levelList(level)
         ))}
       </List>
     </Segment>
