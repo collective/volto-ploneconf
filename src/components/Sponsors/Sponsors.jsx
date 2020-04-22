@@ -79,7 +79,6 @@ class Sponsors extends Component {
 }
 
 export default compose(
-  injectIntl,
   connect(
     state => ({
       items: state.querystringsearch.subrequests.sponsors?.items || [],
