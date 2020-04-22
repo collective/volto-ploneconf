@@ -15,13 +15,13 @@ const TalkView = props => {
     <Container id="page-talk">
       <Helmet title={content.title} />
       <h1 className="documentFirstHeading">
-        {content.type_of_talk.title}: {content.title}
+        {content.type_of_talk.title || content.type_of_talk.token}: {content.title}
       </h1>
       {content.description && (
         <p className="documentDescription">{content.description}</p>
       )}
       {content.audience.map(item => {
-        let audience = item.title;
+        let audience = item.title || item.token;
         let color = color_mapping[audience] || 'green';
         return (
           <Label key={audience} color={color}>
