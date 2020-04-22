@@ -16,7 +16,8 @@ const TalkView = props => {
     <Container id="page-talk">
       <Helmet title={content.title} />
       <h1 className="documentFirstHeading">
-        {content.type_of_talk.title || content.type_of_talk.token}: {content.title}
+        {content.type_of_talk.title || content.type_of_talk.token}:{' '}
+        {content.title}
       </h1>
       {content.description && (
         <p className="documentDescription">{content.description}</p>
