@@ -38,6 +38,7 @@ const TalkView = props => {
           open_end={content.open_end}
         />
       )}
+      {content.room && <p>Location: {content.room.title}</p>}
       {content.details && (
         <div dangerouslySetInnerHTML={{ __html: content.details.data }} />
       )}
