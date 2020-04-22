@@ -2,6 +2,7 @@ import React from 'react';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { Container, Image, Icon, Label, Segment } from 'semantic-ui-react';
 import { Helmet } from '@plone/volto/helpers';
+import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
 const TalkView = props => {
   const { content } = props;
@@ -29,6 +30,14 @@ const TalkView = props => {
           </Label>
         );
       })}
+      {content.start && !content.hide_date && (
+        <When
+          start={content.start}
+          end={content.end}
+          whole_day={content.whole_day}
+          open_end={content.open_end}
+        />
+      )}
       {content.details && (
         <div dangerouslySetInnerHTML={{ __html: content.details.data }} />
       )}
