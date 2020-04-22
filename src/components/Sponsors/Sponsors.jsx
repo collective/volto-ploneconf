@@ -1,14 +1,12 @@
 /**
  * Sponsors component.
- * @module components/theme/Footer/Sponsors
+ * @module components/Sponsors/Sponsors
  */
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { asyncConnect } from 'redux-connect';
 import { compose } from 'redux';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 
 import { getQueryStringResults } from '@plone/volto/actions';
 
@@ -29,7 +27,6 @@ const toSearchOptions = {
  * @class Sponsors
  * @extends Component
  */
-
 class Sponsors extends Component {
   /**
    * Property types.
@@ -58,11 +55,11 @@ class Sponsors extends Component {
   };
 
   /**
-   * Component will mount
-   * @method componentWillMount
+   * Component did mount
+   * @method componentDidMount
    * @returns {undefined}
    */
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     // call action getQueryStringResults
     this.props.getQueryStringResults('/', {...toSearchOptions, fullobjects: 1}, 'sponsors');
   }
@@ -85,24 +82,8 @@ export default compose(
   injectIntl,
   connect(
     state => ({
-      // TODO: why is state.querystringsearch.subrequests.sponsors undefined?
       items: state.querystringsearch.subrequests.sponsors?.items || [],
     }),
     { getQueryStringResults },
   ),
-
-  asyncConnect([
-    {
-      key: 'querystringsearch',
-      promise: ({ store: { dispatch } }) =>
-        dispatch(
-          getQueryStringResults(
-            '/',
-            {...toSearchOptions, fullobjects: 1},
-            'sponsors'
-          ),
-        ),
-    },
-  ]),
-
 )(Sponsors);
