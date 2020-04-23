@@ -1,3 +1,22 @@
+// Hide date fields from contributors
+body.userrole-contributor {
+  #default-start.field,
+  #default-end.field,
+  #default-whole_day.field,
+  #default-open_end.field {
+    display: none;
+  }
+}
+
+body.userrole-reviewer {
+  #default-start.field,
+  #default-end.field,
+  #default-whole_day.field,
+  #default-open_end.field {
+    display: block;
+  }
+}
+
 // Footer
 .ui.horizontal.list.siteactions {
   display: flex;
@@ -10,7 +29,7 @@
 
 // Sponsors
 .ui.segment.sponsors {
-  background-color: lighten(#68778D, 40%);
+  background-color: lighten(#68778d, 40%);
   box-shadow: rgba(153, 153, 153, 0.3) 0px 6px 24px 0px;
   .sponsorheader {
     display: flex;
@@ -19,7 +38,7 @@
     align-items: baseline;
     justify-content: center;
     .headline {
-      margin: 0 0 0 1em;;
+      margin: 0 0 0 1em;
     }
     .subheadline {
       margin: 0;
@@ -32,7 +51,7 @@
       writing-mode: sideways-lr;
       margin: 0 1em 0 0;
       font-size: 1rem;
-      letter-spacing: .2em;
+      letter-spacing: 0.2em;
     }
     div.list {
       display: flex;
@@ -41,7 +60,7 @@
       margin: 0 auto;
       .sponsor {
         height: 6rem;
-        margin: 0 1rem .5rem 0;
+        margin: 0 1rem 0.5rem 0;
         .logo {
           height: 100%;
           width: auto;
@@ -53,5 +72,4 @@
       }
     }
   }
-
 }
