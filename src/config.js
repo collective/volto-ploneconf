@@ -28,7 +28,7 @@ export const views = {
   ...defaultViews,
   layoutViews: {
     ...defaultViews.layoutViews,
-    talkslist_view: TalkListView,
+    talklist_view: TalkListView,
   },
   contentTypesViews: {
     ...defaultViews.contentTypesViews,

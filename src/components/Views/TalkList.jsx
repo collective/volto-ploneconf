@@ -15,13 +15,13 @@ const TalkListView = props => {
   const color_mapping = {
     Beginner: 'green',
     Advanced: 'yellow',
-    Professionals: 'red',
+    Professional: 'red',
   };
 
   React.useEffect(() => {
     dispatch(
       searchContent('/', {
-        portal_type: ['Talk'],
+        portal_type: ['talk'],
         fullobjects: true,
       }),
     );
