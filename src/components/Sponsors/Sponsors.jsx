@@ -61,7 +61,11 @@ class Sponsors extends Component {
    */
   componentDidMount() {
     // call action getQueryStringResults
-    this.props.getQueryStringResults('/', {...toSearchOptions, fullobjects: 1}, 'sponsors');
+    this.props.getQueryStringResults(
+      '/',
+      { ...toSearchOptions, fullobjects: 1 },
+      'sponsors',
+    );
   }
 
   /**
@@ -73,7 +77,7 @@ class Sponsors extends Component {
     const sponsorlist = this.props.items;
     return (
       <>
-       <SponsorsBody sponsorlist={sponsorlist} />
+        <SponsorsBody sponsorlist={sponsorlist} />
       </>
   )}
 }
