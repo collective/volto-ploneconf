@@ -1413,10 +1413,10 @@
   dependencies:
     "@types/node" ">= 8"
 
-"@plone/volto@5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@plone/volto/-/volto-5.1.0.tgz#880358871e9bd6b52385448442ba6b83aab38c46"
-  integrity sha512-VJ4SnHpZRkoMWzpG3s8DaOmPgSfq3vxnkO+bWj43ZlyJ8fW8JLmFaLjp7TXwuMtA7bSVFaV12VSx5P8qzCt+4Q==
+"@plone/volto@5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@plone/volto/-/volto-5.3.0.tgz#6c97535ff46706c1ad518eef68d865b81da140e4"
+  integrity sha512-RzYtkzZf9LVDdneqZmltpBBMKm4xSlcSUTIvJIant5RERke49T3PDfX09BgOpt0Y1+Xj9QYRxasEokuNM0N3pQ==
   dependencies:
     "@babel/core" "7.7.4"
     "@babel/plugin-proposal-decorators" "7.7.4"
