@@ -74,19 +74,13 @@ class Sponsors extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    const sponsorlist = this.props.items;
-    return (
-      <>
-        <SponsorsBody sponsorlist={sponsorlist} />
-      </>
-  )}
+    return <SponsorsBody sponsorlist={this.props.items} />;
+  }
 }
 
-export default compose(
-  connect(
-    state => ({
-      items: state.querystringsearch.subrequests.sponsors?.items || [],
-    }),
-    { getQueryStringResults },
-  ),
+export default connect(
+  state => ({
+    items: state.querystringsearch.subrequests.sponsors?.items || [],
+  }),
+  { getQueryStringResults },
 )(Sponsors);

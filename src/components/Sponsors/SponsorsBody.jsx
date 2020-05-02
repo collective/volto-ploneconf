@@ -20,7 +20,7 @@ const SponsorsBody = ({ sponsorlist }) => {
   const groupedSponsors = sponsorlist => {
     let result = {};
     for (const level in LevelVocabulary) {
-      result[level] = sponsorlist.filter(el => el.level.token == level);
+      result[level] = sponsorlist.filter(el => el.level.token === level);
     }
     return result;
   };
@@ -45,7 +45,7 @@ const SponsorsBody = ({ sponsorlist }) => {
                             )}
                             size="small"
                             alt={item.title}
-                            title={item.level?.title + ' ' + item.title}
+                            title={item.title}
                           />
                         ) : (
                           <p>{item.title}</p>
@@ -60,7 +60,6 @@ const SponsorsBody = ({ sponsorlist }) => {
         </List>
       );
     }
-
     return null;
   };
 
