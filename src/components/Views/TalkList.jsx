@@ -46,7 +46,7 @@ const TalkListView = props => {
                     {item.type_of_talk.title}: {item.title}
                   </Link>
                 </h2>
-                {item.audience.map(item => {
+                {item.audience?.map(item => {
                   let audience = item.title;
                   let color = color_mapping[audience] || 'green';
                   return (

@@ -53,7 +53,7 @@ const TalkView = props => {
             Audience
           </Header>
         )}
-        {content.audience.map(item => {
+        {content.audience?.map(item => {
           let audience = item.title || item.token;
           let color = color_mapping[audience] || 'green';
           return (
