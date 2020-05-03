@@ -6,7 +6,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { getQueryStringResults } from '@plone/volto/actions';
 
@@ -46,7 +45,7 @@ class Sponsors extends Component {
   };
 
   /**
-   * Default properties.
+   * Default (values of) properties.
    * @property {Object} defaultProps Default properties.
    * @static
    */
@@ -69,6 +68,46 @@ class Sponsors extends Component {
   }
 
   /**
+   * Component did update
+   * @method componentDidUpdate
+   * @param {Object} prevProps Previous properties
+   * @returns {undefined}
+   *
+   * Update component when a new sponsor is created / deleted / updated.
+   * Two steps are necessary:
+   * - subscription of a value / of values in store that reflects the fact that a new sponsor is created / deleted / updated.
+   * - call search action on property change; do it here in componentDidUpdate
+   */
+  componentDidUpdate(prevProps) {
+    console.log('*** componentDidUpdate');
+    if (
+      // content type instance created and instance is sponsor
+      (this.props.subscribedValueContent.create.loaded &&
+        this.props.subscribedValueContent.data['@type'] === 'sponsor' &&
+        this.props.subscribedValueContent !==
+          prevProps.subscribedValueContent) ||
+      // content pasted in /contents
+      (this.props.subscribedValueClipboard.request.loaded &&
+        this.props.subscribedValueClipboard !==
+          prevProps.subscribedValueClipboard) ||
+      // content deleted
+      (this.props.subscribedValueContent.delete.loaded &&
+        this.props.subscribedValueContent !== prevProps.subscribedValueContent) ||
+      // content updated
+      (this.props.subscribedValueContent.update.loaded &&
+        this.props.subscribedValueContent !== prevProps.subscribedValueContent)
+    ) {
+      // then call action getQueryStringResults
+      console.log('componentDidUpdate call getQueryStringResults');
+      this.props.getQueryStringResults(
+        '/',
+        { ...toSearchOptions, fullobjects: 1 },
+        'sponsors',
+      );
+    }
+  }
+
+  /**
    * Render method.
    * @method render
    * @returns {string} Markup for the component.
@@ -81,6 +120,10 @@ class Sponsors extends Component {
 export default connect(
   state => ({
     items: state.querystringsearch.subrequests.sponsors?.items || [],
+    // subsription of something in store that is updated on creation of a sponsor
+    // see docstring componentDidUpdate
+    subscribedValueContent: state.content,
+    subscribedValueClipboard: state.clipboard,
   }),
   { getQueryStringResults },
 )(Sponsors);

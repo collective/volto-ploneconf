@@ -52,6 +52,7 @@ body.userrole-reviewer {
       margin: 0 1em 0 0;
       font-size: 1rem;
       letter-spacing: 0.2em;
+      cursor: default;
     }
     div.list {
       display: flex;
@@ -59,17 +60,24 @@ body.userrole-reviewer {
       flex-wrap: wrap;
       margin: 0 auto;
       .sponsor {
-        height: 6rem;
         margin: 0 1rem 0.5rem 0;
         .logo {
           height: 100%;
           width: auto;
-          img {
-            height: 100%;
-            width: auto;
-          }
         }
       }
+    }
+    .sponsor {
+      height: 6rem;
+    }
+    &.platinum .sponsor {
+      height: 10rem;
+    }
+    &.gold .sponsor {
+      height: 8rem;
+    }
+    &.silver .sponsor {
+      height: 7rem;
     }
   }
 }

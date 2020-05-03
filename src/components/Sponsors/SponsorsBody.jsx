@@ -32,7 +32,10 @@ const SponsorsBody = ({ sponsorlist }) => {
           {Object.entries(LevelVocabulary).map(level => {
             if (sponsors[level[0]].length) {
               return (
-                <List.Item key={level[0]} className="sponsorlevel">
+                <List.Item
+                  key={level[0]}
+                  className={'sponsorlevel ' + level[0]}
+                >
                   <h3>{level[0].toUpperCase()}</h3>
                   <List horizontal>
                     {sponsors[level[0]].map(item => (
