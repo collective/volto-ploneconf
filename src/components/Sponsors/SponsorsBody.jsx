@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Segment, Image } from 'semantic-ui-react';
-import { FormattedMessage } from 'react-intl';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
 const LevelVocabulary = {
@@ -77,18 +76,7 @@ const SponsorsBody = ({ sponsorlist }) => {
       inverted
     >
       <div className="sponsorheader">
-        <h3 className="subheadline">
-          <FormattedMessage
-            id="Our sponsors do support and are supported of Plone."
-            defaultMessage="Our sponsors do support and are supported of Plone."
-          />
-        </h3>
-        <h2 className="headline">
-          <FormattedMessage
-            id="We ❤ our sponsors"
-            defaultMessage="We ❤ our sponsors"
-          />
-        </h2>
+        <h3 className="subheadline">We ❤ our sponsors</h3>
       </div>
       {levelList()}
     </Segment>
