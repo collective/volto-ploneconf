@@ -79,7 +79,6 @@ class Sponsors extends Component {
    * - call search action on property change; do it here in componentDidUpdate
    */
   componentDidUpdate(prevProps) {
-    console.log('*** componentDidUpdate');
     if (
       // content type instance created and instance is sponsor
       (this.props.subscribedValueContent.create.loaded &&
@@ -98,7 +97,6 @@ class Sponsors extends Component {
         this.props.subscribedValueContent !== prevProps.subscribedValueContent)
     ) {
       // then call action getQueryStringResults
-      console.log('componentDidUpdate call getQueryStringResults');
       this.props.getQueryStringResults(
         '/',
         { ...toSearchOptions, fullobjects: 1 },
