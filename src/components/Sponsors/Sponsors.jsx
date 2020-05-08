@@ -91,7 +91,8 @@ class Sponsors extends Component {
           prevProps.subscribedValueClipboard) ||
       // content deleted
       (this.props.subscribedValueContent.delete.loaded &&
-        this.props.subscribedValueContent !== prevProps.subscribedValueContent) ||
+        this.props.subscribedValueContent !==
+          prevProps.subscribedValueContent) ||
       // content updated
       (this.props.subscribedValueContent.update.loaded &&
         this.props.subscribedValueContent !== prevProps.subscribedValueContent)
