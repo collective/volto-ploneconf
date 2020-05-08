@@ -24,9 +24,20 @@ const SponsorsBody = ({ sponsorlist }) => {
     return result;
   };
 
-  const levelList = () => {
-    if (sponsorlist?.length) {
-      return (
+  const sponsors = groupedSponsors(sponsorlist);
+
+  return (
+    <Segment
+      basic
+      textAlign="center"
+      className="sponsors"
+      aria-label="Sponsors"
+      inverted
+    >
+      <div className="sponsorheader">
+        <h3 className="subheadline">We ❤ our sponsors</h3>
+      </div>
+      {sponsorlist?.length && (
         <List>
           {Object.entries(LevelVocabulary).map(level => {
             if (sponsors[level[0]].length) {
@@ -64,25 +75,7 @@ const SponsorsBody = ({ sponsorlist }) => {
             }
           })}
         </List>
-      );
-    }
-    return null;
-  };
-
-  const sponsors = groupedSponsors(sponsorlist);
-
-  return (
-    <Segment
-      basic
-      textAlign="center"
-      className="sponsors"
-      aria-label="Sponsors"
-      inverted
-    >
-      <div className="sponsorheader">
-        <h3 className="subheadline">We ❤ our sponsors</h3>
-      </div>
-      {levelList()}
+      )}
     </Segment>
   );
 };
