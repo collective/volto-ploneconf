@@ -18,6 +18,11 @@ const toSearchOptions = {
       o: 'plone.app.querystring.operation.selection.any',
       v: ['sponsor'],
     },
+    {
+      i: 'review_state',
+      o: 'plone.app.querystring.operation.selection.any',
+      v: ['published'],
+    },
   ],
 };
 
@@ -91,7 +96,8 @@ class Sponsors extends Component {
           prevProps.subscribedValueClipboard) ||
       // content deleted
       (this.props.subscribedValueContent.delete.loaded &&
-        this.props.subscribedValueContent !== prevProps.subscribedValueContent) ||
+        this.props.subscribedValueContent !==
+          prevProps.subscribedValueContent) ||
       // content updated
       (this.props.subscribedValueContent.update.loaded &&
         this.props.subscribedValueContent !== prevProps.subscribedValueContent)
@@ -111,7 +117,11 @@ class Sponsors extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    return <SponsorsBody sponsorlist={this.props.items} />;
+    if (this.props.items?.length) {
+      return <SponsorsBody sponsorlist={this.props.items} />;
+    } else {
+      return null;
+    }
   }
 }
 
