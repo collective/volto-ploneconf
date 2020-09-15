@@ -10,12 +10,12 @@ import { GET_VOTES, VOTE, CLEAR_VOTES } from '../../constants/ActionTypes';
  * @function getVotes
  * @returns {Object} Votes action.
  */
-export function getVotes() {
+export function getVotes(url) {
   return {
     type: GET_VOTES,
     request: {
       op: 'get',
-      path: `/@votes`,
+      path: `${url}/@votes`,
     },
   };
 }
