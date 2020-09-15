@@ -1,40 +1,18 @@
 /**
- * Groups reducer.
+ * Voting reducer.
  * @module reducers/votes/votes
  */
 
-import { GET_VOTES, VOTE, CLEAR_VOTES } from '../../constants/ActionTypes';
+import { GET_VOTES, VOTE, CLEAR_VOTES } from '~/constants/ActionTypes';
 
 const initialState = {
-  vote: {
-    loaded: false,
-    loading: false,
-    error: null,
-  },
-  get: {
-    loaded: false,
-    loading: false,
-    error: null,
-  },
-  clear: {
-    loaded: false,
-    loading: false,
-    error: null,
-  },
+  loaded: false,
+  loading: false,
+  error: null,
 };
 
 /**
- * Get request key
- * @function getRequestKey
- * @param {string} actionType Action type.
- * @returns {string} Request key.
- */
-function getRequestKey(actionType) {
-  return actionType.split('_')[0].toLowerCase();
-}
-
-/**
- * Groups reducer.
+ * Voting reducer.
  * @function votes
  * @param {Object} state Current state.
  * @param {Object} action Action to be handled.
@@ -42,38 +20,40 @@ function getRequestKey(actionType) {
  */
 export default function votes(state = initialState, action = {}) {
   switch (action.type) {
-    case `${VOTE}_PENDING`:
     case `${GET_VOTES}_PENDING`:
+    case `${VOTE}_PENDING`:
     case `${CLEAR_VOTES}_PENDING`:
       return {
         ...state,
-        [getRequestKey(action.type)]: {
-          loading: true,
-          loaded: false,
-          error: null,
-        },
+        error: null,
+        loaded: false,
+        loading: true,
       };
-    case `${VOTE}_SUCCESS`:
     case `${GET_VOTES}_SUCCESS`:
-    case `${CLEAR_VOTES}_SUCCESS`:
       return {
         ...state,
-        [getRequestKey(action.type)]: {
-          loading: false,
-          loaded: true,
-          error: null,
-        },
+        ...action.result,
+        error: null,
+        loaded: true,
+        loading: false,
       };
-    case `${VOTE}_FAIL`:
+    case `${VOTE}_SUCCESS`: // TODO ${VOTE}_SUCCESS
+    case `${CLEAR_VOTES}_SUCCESS`: // TODO ${CLEAR_VOTES}_SUCCESS
+      return {
+        ...state,
+        ...action.result,
+        error: null,
+        loaded: true,
+        loading: false,
+      };
     case `${GET_VOTES}_FAIL`:
+    case `${VOTE}_FAIL`:
     case `${CLEAR_VOTES}_FAIL`:
       return {
         ...state,
-        [getRequestKey(action.type)]: {
-          loading: false,
-          loaded: false,
-          error: action.error,
-        },
+        error: action.error,
+        loaded: false,
+        loading: false,
       };
     default:
       return state;
