@@ -1,3 +1,7 @@
+.discreet {
+  color: rgb(159, 170, 189);
+}
+
 // Hide date fields from contributors
 body.userrole-contributor {
   #default-start.field,
@@ -29,7 +33,7 @@ body.userrole-reviewer {
 
 // Sponsors
 .ui.segment.sponsors {
-  background-color: lighten(#68778D, 40%);
+  background-color: rgb(177, 192, 219);
   box-shadow: 0px 6px 24px 0px rgba(153, 153, 153, 0.3);
   .sponsorheader {
     display: flex;
