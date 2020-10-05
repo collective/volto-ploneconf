@@ -43,3 +43,6 @@ export const widgets = {
 export const blocks = {
   ...defaultBlocks,
 };
+
+export const addonRoutes = [];
+export const addonReducers = {};
