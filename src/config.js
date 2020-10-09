@@ -25,10 +25,13 @@ import createInlineStyleButton from 'draft-js-buttons/lib/utils/createInlineStyl
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import radiodisabledSVG from '@plone/volto/icons/radio-disabled.svg';
 
+// Button
 const DiscreetButton = createInlineStyleButton({
   style: 'DISCREET',
   children: <Icon name={radiodisabledSVG} size="24px" />,
 });
+let newbuttonset = defaultSettings.richTextEditorInlineToolbarButtons;
+newbuttonset.splice(2, 0, DiscreetButton);
 
 // Renderer
 const customInline = {
@@ -39,8 +42,6 @@ const customInline = {
   ),
 };
 
-let newbuttonset = defaultSettings.richTextEditorInlineToolbarButtons;
-newbuttonset.splice(2, 0, DiscreetButton);
 export const settings = {
   ...defaultSettings,
   richTextEditorInlineToolbarButtons: newbuttonset,
