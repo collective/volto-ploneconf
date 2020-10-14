@@ -4,6 +4,7 @@
  */
 
 import defaultReducers from '@plone/volto/reducers';
+import votes from './votes/votes';
 
 /**
  * Root reducer.
@@ -14,7 +15,7 @@ import defaultReducers from '@plone/volto/reducers';
  */
 const reducers = {
   ...defaultReducers,
-  // Add your reducers here
+  votes,
 };
 
 export default reducers;

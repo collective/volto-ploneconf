@@ -10,3 +10,6 @@
  *   searchContent,
  * };
  */
+import { getVotes, vote, clearVotes } from './votes/votes';
+
+export { getVotes, vote, clearVotes };
