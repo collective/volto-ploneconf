@@ -6,11 +6,13 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import { searchContent } from '@plone/volto/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const TalkListView = props => {
+const TalkListView = (props) => {
   const { content } = props;
-  const searchRequests = useSelector(state => state.search);
+  const searchRequests = useSelector(
+    (store) => store.search.subrequests.talklist,
+  );
   const dispatch = useDispatch();
-  const results = searchRequests.items;
+  const results = searchRequests?.items;
 
   const color_mapping = {
     Beginner: 'green',
@@ -20,10 +22,14 @@ const TalkListView = props => {
 
   React.useEffect(() => {
     dispatch(
-      searchContent('/', {
-        portal_type: ['talk'],
-        fullobjects: true,
-      }),
+      searchContent(
+        '/',
+        {
+          portal_type: ['talk'],
+          fullobjects: true,
+        },
+        'talklist',
+      ),
     );
   }, [dispatch]);
 
@@ -39,14 +45,14 @@ const TalkListView = props => {
         </header>
         <section id="content-core">
           {results &&
-            results.map(item => (
+            results.map((item) => (
               <Segment padded>
                 <h2>
                   <Link to={item['@id']} title={item['@type']}>
                     {item.type_of_talk.title}: {item.title}
                   </Link>
                 </h2>
-                {item.audience?.map(item => {
+                {item.audience?.map((item) => {
                   let audience = item.title;
                   let color = color_mapping[audience] || 'green';
                   return (
