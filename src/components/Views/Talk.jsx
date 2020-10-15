@@ -87,18 +87,18 @@ const TalkView = (props) => {
           )}
           {content.email && (
             <p>
-              <a href={`mailto:${content.email}`}>
-                <Icon name="mail" /> {content.email}
-              </a>
+              email:{' '}
+              <a href={`mailto:${content.email}`}>{content.email}</a>
             </p>
           )}
           {content.twitter && (
             <p>
+              twitter:{' '}
               <a
                 href={`https://twitter.com/${content.twitter}`}
                 target="_blank"
-                rel="noopener noreferrer">
-                <Icon name="twitter" />{' '}
+                rel="noopener noreferrer"
+              >
                 {content.twitter.startsWith('@')
                   ? content.twitter
                   : '@' + content.twitter}
@@ -107,12 +107,13 @@ const TalkView = (props) => {
           )}
           {content.github && (
             <p>
+              github:{' '}
               <a
                 href={`https://github.com/${content.github}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Icon name="github" /> {content.github}
+                {content.github}
               </a>
             </p>
           )}
