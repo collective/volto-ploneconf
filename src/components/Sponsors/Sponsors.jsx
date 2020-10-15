@@ -1,137 +1,84 @@
-/**
- * Sponsors component.
- * @module components/Sponsors/Sponsors
- */
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Segment, List, Image } from 'semantic-ui-react';
+import { keys, isEmpty } from 'lodash';
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { flattenToAppURL } from '@plone/volto/helpers';
+import { searchContent } from '@plone/volto/actions';
 
-import { getQueryStringResults } from '@plone/volto/actions';
+const Sponsors = () => {
+  const dispatch = useDispatch();
+  const searchRequests = useSelector(
+    (store) => store.search.subrequests.sponsors,
+  );
 
-import SponsorsBody from './SponsorsBody';
+  const groupedSponsorsByLevel = (array) =>
+    array.reduce((obj, item) => {
+      obj[item.level.token] = obj[item.level.token]
+        ? obj[item.level.token].push(item)
+        : [item];
+      return obj;
+    }, {});
+  const sponsors = groupedSponsorsByLevel(searchRequests?.items || []);
 
-const toSearchOptions = {
-  query: [
-    {
-      i: 'portal_type',
-      o: 'plone.app.querystring.operation.selection.any',
-      v: ['sponsor'],
-    },
-    {
-      i: 'review_state',
-      o: 'plone.app.querystring.operation.selection.any',
-      v: ['published'],
-    },
-  ],
+  React.useEffect(() => {
+    dispatch(
+      searchContent(
+        '/',
+        {
+          portal_type: ['sponsor'],
+          fullobjects: true,
+        },
+        'sponsors',
+      ),
+    );
+  }, [dispatch]);
+
+  return !isEmpty(sponsors) ? (
+    <Segment
+      basic
+      textAlign="center"
+      className="sponsors"
+      aria-label="Sponsors"
+      inverted
+    >
+      <div className="sponsorheader">
+        <h3 className="subheadline">We ❤ our sponsors</h3>
+      </div>
+      <List>
+        {keys(sponsors).map((level) => {
+          return (
+            <List.Item key={level} className={'sponsorlevel ' + level}>
+              <h3>{level.toUpperCase()}</h3>
+              <List horizontal>
+                {sponsors[level].map((item) => (
+                  <List.Item key={item['UID']} className="sponsor">
+                    {item.logo ? (
+                      // TODO remove attributes "as" and "href" before creating git tag
+                      <Image
+                        className="logo"
+                        as="a"
+                        href={item.url}
+                        target="_blank"
+                        src={flattenToAppURL(item.logo.scales.preview.download)}
+                        size="small"
+                        alt={item.title}
+                        title={item.title}
+                      />
+                    ) : (
+                      <a href={item['@id']}>{item.title}</a>
+                    )}
+                  </List.Item>
+                ))}
+              </List>
+            </List.Item>
+          );
+        })}
+      </List>
+    </Segment>
+  ) : (
+    <></>
+  );
 };
 
-/**
- * Component to display the sponsors.
- * @class Sponsors
- * @extends Component
- */
-class Sponsors extends Component {
-  /**
-   * Property types.
-   * @property {Object} propTypes Property types.
-   * @static
-   */
-  static propTypes = {
-    getQueryStringResults: PropTypes.func.isRequired,
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        '@id': PropTypes.string,
-        '@type': PropTypes.string,
-        title: PropTypes.string,
-        description: PropTypes.string,
-      }),
-    ),
-  };
-
-  /**
-   * Default (values of) properties.
-   * @property {Object} defaultProps Default properties.
-   * @static
-   */
-  static defaultProps = {
-    items: [],
-  };
-
-  /**
-   * Component did mount
-   * @method componentDidMount
-   * @returns {undefined}
-   */
-  componentDidMount() {
-    // call action getQueryStringResults
-    this.props.getQueryStringResults(
-      '/',
-      { ...toSearchOptions, fullobjects: 1 },
-      'sponsors',
-    );
-  }
-
-  /**
-   * Component did update
-   * @method componentDidUpdate
-   * @param {Object} prevProps Previous properties
-   * @returns {undefined}
-   *
-   * Update component when a new sponsor is created / deleted / updated.
-   * Two steps are necessary:
-   * - subscription of a value / of values in store that reflects the fact that a new sponsor is created / deleted / updated.
-   * - call search action on property change; do it here in componentDidUpdate
-   */
-  componentDidUpdate(prevProps) {
-    if (
-      // content type instance created and instance is sponsor
-      (this.props.subscribedValueContent.create.loaded &&
-        this.props.subscribedValueContent.data['@type'] === 'sponsor' &&
-        this.props.subscribedValueContent !==
-          prevProps.subscribedValueContent) ||
-      // content pasted in /contents
-      (this.props.subscribedValueClipboard.request.loaded &&
-        this.props.subscribedValueClipboard !==
-          prevProps.subscribedValueClipboard) ||
-      // content deleted
-      (this.props.subscribedValueContent.delete.loaded &&
-        this.props.subscribedValueContent !==
-          prevProps.subscribedValueContent) ||
-      // content updated
-      (this.props.subscribedValueContent.update.loaded &&
-        this.props.subscribedValueContent !== prevProps.subscribedValueContent)
-    ) {
-      // then call action getQueryStringResults
-      this.props.getQueryStringResults(
-        '/',
-        { ...toSearchOptions, fullobjects: 1 },
-        'sponsors',
-      );
-    }
-  }
-
-  /**
-   * Render method.
-   * @method render
-   * @returns {string} Markup for the component.
-   */
-  render() {
-    if (this.props.items?.length) {
-      return <SponsorsBody sponsorlist={this.props.items} />;
-    } else {
-      return null;
-    }
-  }
-}
-
-export default connect(
-  state => ({
-    items: state.querystringsearch.subrequests.sponsors?.items || [],
-    // subsription of something in store that is updated on creation of a sponsor
-    // see docstring componentDidUpdate
-    subscribedValueContent: state.content,
-    subscribedValueClipboard: state.clipboard,
-  }),
-  { getQueryStringResults },
-)(Sponsors);
+export default Sponsors;
