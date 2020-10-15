@@ -39,9 +39,7 @@ const TalkListView = (props) => {
       <article id="content">
         <header>
           <h1 className="documentFirstHeading">{content.title}</h1>
-          {content.description && (
-            <p className="documentDescription">{content.description}</p>
-          )}
+          <p className="documentDescription">{content.description}</p>
         </header>
         <section id="content-core">
           {results &&
