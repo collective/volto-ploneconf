@@ -23,7 +23,7 @@ const TalkListView = (props) => {
   React.useEffect(() => {
     dispatch(
       searchContent(
-        '/',
+        content['@id'],
         {
           portal_type: ['talk'],
           fullobjects: true,
@@ -46,9 +46,9 @@ const TalkListView = (props) => {
         <section id="content-core">
           {results &&
             results.map((item) => (
-              <Segment padded>
+              <Segment padded clearing>
                 <h2>
-                  <Link to={item['@id']} title={item['@type']}>
+                  <Link to={item['@id']}>
                     {item.type_of_talk.title}: {item.title}
                   </Link>
                 </h2>
@@ -70,7 +70,11 @@ const TalkListView = (props) => {
                     avatar
                   />
                 )}
-                {item.description && <div>{item.description}</div>}
+                {item.description && (
+                  <Segment basic className="content-area">
+                    {item.description}
+                  </Segment>
+                )}
                 <Link to={item['@id']} title={item['@type']}>
                   read more ...
                 </Link>
