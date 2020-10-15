@@ -14,9 +14,8 @@ const Sponsors = () => {
 
   const groupedSponsorsByLevel = (array) =>
     array.reduce((obj, item) => {
-      obj[item.level.token] = obj[item.level.token]
-        ? obj[item.level.token].push(item)
-        : [item];
+      let token = item.level?.token || 'bronze';
+      obj[token] = obj[token] ? obj[token].push(item) : [item];
       return obj;
     }, {});
   const sponsors = groupedSponsorsByLevel(searchRequests?.items || []);
@@ -27,6 +26,7 @@ const Sponsors = () => {
         '/',
         {
           portal_type: ['sponsor'],
+          review_state: 'published',
           fullobjects: true,
         },
         'sponsors',
@@ -52,7 +52,7 @@ const Sponsors = () => {
               <h3>{level.toUpperCase()}</h3>
               <List horizontal>
                 {sponsors[level].map((item) => (
-                  <List.Item key={item['UID']} className="sponsor">
+                  <List.Item key={item['@id']} className="sponsor">
                     {item.logo ? (
                       // TODO remove attributes "as" and "href" before creating git tag
                       <Image
