@@ -11,12 +11,12 @@ import {
 import { Helmet } from '@plone/volto/helpers';
 import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
-const TalkView = props => {
+const TalkView = (props) => {
   const { content } = props;
   const color_mapping = {
     Beginner: 'green',
     Advanced: 'yellow',
-    Professionals: 'red',
+    Professional: 'purple',
   };
 
   return (
@@ -55,7 +55,7 @@ const TalkView = props => {
         )}
         {content.audience?.map(item => {
           let audience = item.title || item.token;
-          let color = color_mapping[audience] || 'green';
+          let color = color_mapping[audience] || color_mapping['Beginner'];
           return (
             <Label key={audience} color={color}>
               {audience}

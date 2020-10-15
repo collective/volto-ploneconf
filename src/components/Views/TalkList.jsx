@@ -17,7 +17,7 @@ const TalkListView = (props) => {
   const color_mapping = {
     Beginner: 'green',
     Advanced: 'yellow',
-    Professional: 'red',
+    Professional: 'purple',
   };
 
   React.useEffect(() => {
@@ -52,7 +52,7 @@ const TalkListView = (props) => {
                 </h2>
                 {item.audience?.map((item) => {
                   let audience = item.title;
-                  let color = color_mapping[audience] || 'green';
+                  let color = color_mapping[audience] || color_mapping['Beginner'];
                   return (
                     <Label key={audience} color={color}>
                       {audience}
