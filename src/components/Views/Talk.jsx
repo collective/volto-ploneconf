@@ -74,7 +74,13 @@ const TalkView = (props) => {
           <Header dividing>{content.speaker}</Header>
           {content.website ? (
             <p>
-              <a href={content.website}>{content.company}</a>
+              <a
+                href={content.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {content.company}
+              </a>
             </p>
           ) : (
             <p>{content.company}</p>
@@ -88,7 +94,10 @@ const TalkView = (props) => {
           )}
           {content.twitter && (
             <p>
-              <a href={`https://twitter.com/${content.twitter}`}>
+              <a
+                href={`https://twitter.com/${content.twitter}`}
+                target="_blank"
+                rel="noopener noreferrer">
                 <Icon name="twitter" />{' '}
                 {content.twitter.startsWith('@')
                   ? content.twitter
@@ -98,7 +107,11 @@ const TalkView = (props) => {
           )}
           {content.github && (
             <p>
-              <a href={`https://github.com/${content.github}`}>
+              <a
+                href={`https://github.com/${content.github}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Icon name="github" /> {content.github}
               </a>
             </p>
