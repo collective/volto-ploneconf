@@ -44,7 +44,7 @@ const TalkListView = (props) => {
         <section id="content-core">
           {results &&
             results.map((item) => (
-              <Segment padded clearing>
+              <Segment padded clearing className={item.review_state}>
                 <h2>
                   <Link to={item['@id']}>
                     {item.type_of_talk.title}: {item.title}
@@ -52,7 +52,8 @@ const TalkListView = (props) => {
                 </h2>
                 {item.audience?.map((item) => {
                   let audience = item.title;
-                  let color = color_mapping[audience] || color_mapping['Beginner'];
+                  let color =
+                    color_mapping[audience] || color_mapping['Beginner'];
                   return (
                     <Label key={audience} color={color}>
                       {audience}

@@ -2,6 +2,12 @@
   color: rgb(159, 170, 189);
 }
 
+.ui.segment {
+  &.private {
+    box-shadow: 0px 1px 2px 0 orangered;
+  }
+}
+
 // Hide date fields from contributors
 body.userrole-contributor {
   #default-start.field,
