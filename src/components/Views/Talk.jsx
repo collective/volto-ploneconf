@@ -11,8 +11,6 @@ import {
 import { Helmet } from '@plone/volto/helpers';
 import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
-import { Voting } from '~/components';
-
 const TalkView = props => {
   const { content } = props;
   const color_mapping = {
@@ -28,7 +26,6 @@ const TalkView = props => {
         {content.type_of_talk.title || content.type_of_talk.token}:{' '}
         {content.title}
       </h1>
-      <Voting />
       <Segment floated="right">
         {content.start && !content.hide_date && (
           <>
