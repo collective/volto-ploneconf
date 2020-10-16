@@ -6,19 +6,18 @@ import { keys, isEmpty } from 'lodash';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { searchContent } from '@plone/volto/actions';
 
+const groupedSponsorsByLevel = (array = []) =>
+  array.reduce((obj, item) => {
+    let token = item.level?.token || 'bronze';
+    obj[token] ? obj[token].push(item) : (obj[token] = [item]);
+    return obj;
+  }, {});
+
 const Sponsors = () => {
   const dispatch = useDispatch();
-  const searchRequests = useSelector(
-    (store) => store.search.subrequests.sponsors,
+  const sponsors = useSelector((state) =>
+    groupedSponsorsByLevel(state.search.subrequests.sponsors?.items),
   );
-
-  const groupedSponsorsByLevel = (array) =>
-    array.reduce((obj, item) => {
-      let token = item.level?.token || 'bronze';
-      obj[token] = obj[token] ? obj[token].push(item) : [item];
-      return obj;
-    }, {});
-  const sponsors = groupedSponsorsByLevel(searchRequests?.items || []);
 
   React.useEffect(() => {
     dispatch(
@@ -43,7 +42,7 @@ const Sponsors = () => {
       inverted
     >
       <div className="sponsorheader">
-        <h3 className="subheadline">We ❤ our sponsors</h3>
+        <h3 className="subheadline">SPONSORS</h3>
       </div>
       <List>
         {keys(sponsors).map((level) => {
