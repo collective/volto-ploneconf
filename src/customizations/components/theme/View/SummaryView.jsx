@@ -1,6 +1,7 @@
 /**
  * Summary view component.
  * @module components/theme/View/SummaryView
+ * Changes: show effective date
  */
 
 import React from 'react';

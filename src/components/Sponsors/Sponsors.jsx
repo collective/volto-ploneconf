@@ -53,11 +53,8 @@ const Sponsors = () => {
                 {sponsors[level].map((item) => (
                   <List.Item key={item['@id']} className="sponsor">
                     {item.logo ? (
-                      // TODO remove attributes "as" and "href" before creating git tag
                       <Image
                         className="logo"
-                        as="a"
-                        href={item.url}
                         target="_blank"
                         src={flattenToAppURL(item.logo.scales.preview.download)}
                         size="small"

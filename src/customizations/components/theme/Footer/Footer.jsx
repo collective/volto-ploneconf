@@ -8,7 +8,7 @@ import { Container, List, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 
-import { Sponsors } from '../../../../components';
+import { Sponsors } from '@package/components';
 
 const messages = defineMessages({
   copyright: {

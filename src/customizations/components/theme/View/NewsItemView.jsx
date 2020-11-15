@@ -1,6 +1,7 @@
 /**
  * NewsItemView view component.
  * @module components/theme/View/NewsItemView
+ * Changes: show effective date
  */
 
 import React from 'react';

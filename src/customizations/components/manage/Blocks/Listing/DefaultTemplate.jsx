@@ -1,3 +1,7 @@
+/**
+ * Changes: show effective date
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ConditionalLink } from '@plone/volto/components';
