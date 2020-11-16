@@ -27,3 +27,20 @@ test('renders a talk view component with only required props', () => {
   const json = component.toJSON();
   expect(json).toMatchSnapshot();
 });
+
+test('renders a talk view component with some more props', () => {
+  const component = renderer.create(
+    <Provider store={store}>
+      <Talk
+        content={{
+          title: 'Security of Plone',
+          description: 'What makes Plone secure?',
+          speaker: 'Lisa Wedgwood',
+          type_of_talk: { title: 'Talk', token: 'Talk' },
+        }}
+      />
+    </Provider>,
+  );
+  const json = component.toJSON();
+  expect(json).toMatchSnapshot();
+});

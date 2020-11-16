@@ -23,3 +23,37 @@ exports[`renders a talk view component with only required props 1`] = `
   </p>
 </div>
 `;
+
+exports[`renders a talk view component with some more props 1`] = `
+<div
+  className="ui container"
+  id="page-talk"
+>
+  <h1
+    className="documentFirstHeading"
+  >
+    Talk
+    :
+     
+    Security of Plone
+  </h1>
+  <div
+    className="ui right floated segment"
+  />
+  <p
+    className="documentDescription"
+  >
+    What makes Plone secure?
+  </p>
+  <div
+    className="ui clearing segment"
+  >
+    <div
+      className="ui dividing header"
+    >
+      Lisa Wedgwood
+    </div>
+    <p />
+  </div>
+</div>
+`;
