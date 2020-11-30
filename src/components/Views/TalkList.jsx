@@ -6,8 +6,7 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import { searchContent } from '@plone/volto/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const TalkListView = (props) => {
-  const { content } = props;
+const TalkListView = ({ content }) => {
   const searchRequests = useSelector(
     (store) => store.search.subrequests.talklist,
   );
@@ -16,7 +15,7 @@ const TalkListView = (props) => {
 
   const color_mapping = {
     Beginner: 'green',
-    Advanced: 'yellow',
+    Advanced: 'orange',
     Professional: 'purple',
   };
 
@@ -31,7 +30,7 @@ const TalkListView = (props) => {
         'talklist',
       ),
     );
-  }, [dispatch]);
+  }, [dispatch, content]);
 
   return (
     <Container className="view-wrapper">
