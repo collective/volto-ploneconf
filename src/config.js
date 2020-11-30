@@ -63,6 +63,10 @@ export const views = {
   contentTypesViews: {
     ...defaultViews.contentTypesViews,
     talk: TalkView,
+    document: {
+      document_view: defaultViews.DefaultView,
+      talklist_view: TalkListView,
+    },
   },
 };
 
