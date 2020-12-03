@@ -6,6 +6,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Image } from 'semantic-ui-react';
+import moment from 'moment';
 
 import { flattenToAppURL, flattenHTMLToAppURL } from '@plone/volto/helpers';
 
@@ -39,6 +40,10 @@ const NewsItemView = ({ content }) => (
         floated="right"
       />
     )}
+    <p className="discreet">
+      {(content.effective && moment(content.effective).format('ll')) ||
+        moment(content.created).format('ll')}
+    </p>
     {content.text && (
       <div
         dangerouslySetInnerHTML={{
