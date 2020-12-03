@@ -9,5 +9,6 @@
  * };
  */
 import TalkView from './Views/Talk';
+import TalkListView from './Views/TalkList';
 
-export { TalkView };
+export { TalkView, TalkListView };

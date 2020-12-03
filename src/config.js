@@ -20,7 +20,7 @@ import {
   addonReducers as defaultAddonReducers,
   addonRoutes as defaultAddonRoutes,
 } from '@plone/volto/config';
-import { TalkView } from './components';
+import { TalkListView, TalkView } from './components';
 
 export const settings = {
   ...defaultSettings,
@@ -28,9 +28,17 @@ export const settings = {
 
 export const views = {
   ...defaultViews,
+  layoutViews: {
+    ...defaultViews.layoutViews,
+    talklist_view: TalkListView,
+  },
   contentTypesViews: {
     ...defaultViews.contentTypesViews,
     talk: TalkView,
+    document: {
+      document_view: defaultViews.DefaultView,
+      talklist_view: TalkListView,
+    },
   },
 };
 
