@@ -7,7 +7,7 @@ const TalkView = (props) => {
   const color_mapping = {
     Beginner: 'green',
     Advanced: 'yellow',
-    Professional: 'red',
+    Professional: 'purple',
   };
 
   return (
@@ -42,15 +42,13 @@ const TalkView = (props) => {
         )}
         {content.email && (
           <p>
-            <a href={`mailto:${content.email}`}>
-              <Icon name="mail" /> {content.email}
-            </a>
+            Email: <a href={`mailto:${content.email}`}>{content.email}</a>
           </p>
         )}
         {content.twitter && (
           <p>
+            Twitter:{' '}
             <a href={`https://twitter.com/${content.twitter}`}>
-              <Icon name="twitter" />{' '}
               {content.twitter.startsWith('@')
                 ? content.twitter
                 : '@' + content.twitter}
@@ -59,8 +57,9 @@ const TalkView = (props) => {
         )}
         {content.github && (
           <p>
+            Github:{' '}
             <a href={`https://github.com/${content.github}`}>
-              <Icon name="github" /> {content.github}
+              {content.github}
             </a>
           </p>
         )}
