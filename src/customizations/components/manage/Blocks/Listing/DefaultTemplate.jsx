@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ConditionalLink } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import moment from 'moment';
 
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 
@@ -27,6 +28,10 @@ const DefaultTemplate = ({ items, linkMore, isEditMode }) => {
             <ConditionalLink item={item} condition={!isEditMode}>
               <div className="listing-body">
                 <h4>{item.title ? item.title : item.id}</h4>
+                <p>
+                  {(item.effective && moment(item.effective).format('ll')) ||
+                    moment(item.created).format('ll')}
+                </p>
                 <p>{item.description}</p>
               </div>
             </ConditionalLink>
