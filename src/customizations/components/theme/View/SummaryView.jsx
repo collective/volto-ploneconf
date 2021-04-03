@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Image } from 'semantic-ui-react';
 import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
 
 /**
  * Summary view component class.
@@ -41,6 +42,10 @@ const SummaryView = ({ content }) => (
               />
             )}
             {item.description && <p>{item.description}</p>}
+            <p className="discreet">
+              {(item.effective && moment(item.effective).format('ll')) ||
+                moment(item.created).format('ll')}
+            </p>
             <p>
               <Link to={item.url}>
                 <FormattedMessage id="Read More…" defaultMessage="Read More…" />
