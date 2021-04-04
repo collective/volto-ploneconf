@@ -13,8 +13,7 @@ const TalkView = ({ content }) => {
   return (
     <Container id="page-talk">
       <h1 className="documentFirstHeading">
-        {content.type_of_talk.title || content.type_of_talk.token}:{' '}
-        {content.title}
+        {content.type_of_talk.title}: {content.title}
       </h1>
       <Segment floated="right">
         {content.start && !content.hide_date && (
@@ -30,13 +29,21 @@ const TalkView = ({ content }) => {
             />
           </>
         )}
+        {content.room && (
+          <>
+            <Header dividing sub>
+              Where
+            </Header>
+            <p>{content.room.title}</p>
+          </>
+        )}
         {content.audience && (
           <Header dividing sub>
             Audience
           </Header>
         )}
         {content.audience.map((item) => {
-          let audience = item.title || item.token;
+          let audience = item.title;
           let color = color_mapping[audience] || 'green';
           return (
             <Label key={audience} color={color}>
