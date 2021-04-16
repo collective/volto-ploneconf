@@ -73,6 +73,21 @@ const Voting = () => {
             </Button.Group>
           </List.Item>
         )}
+        {votes?.can_clear_votes ? (
+          <>
+            <Divider horizontal section color="red">
+              Danger Zone
+            </Divider>
+            <List.Item>
+              <List.Content>
+                <List.Header>Clear votes</List.Header>
+                <List.Description>
+                  TODO button for clearing votes of this item
+                </List.Description>
+              </List.Content>
+            </List.Item>
+          </>
+        ) : null}
       </List>
     </Segment>
   ) : null;
