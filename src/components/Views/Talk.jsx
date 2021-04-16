@@ -3,6 +3,8 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import { Container, Header, Image, Label, Segment } from 'semantic-ui-react';
 import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
+import { Voting } from '~/components';
+
 const TalkView = ({ content }) => {
   const color_mapping = {
     Beginner: 'green',
@@ -15,6 +17,7 @@ const TalkView = ({ content }) => {
       <h1 className="documentFirstHeading">
         {content.type_of_talk.title}: {content.title}
       </h1>
+      <Voting />
       <Segment floated="right">
         {content.start && !content.hide_date && (
           <>
