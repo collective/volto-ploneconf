@@ -6,7 +6,7 @@
 import { GET_VOTES, VOTE, CLEAR_VOTES } from '../../constants/ActionTypes';
 
 /**
- * Get Votes Information.
+ * Get Votes Information
  * @function getVotes
  * @returns {Object} Votes action.
  */
@@ -26,27 +26,30 @@ export function getVotes(url) {
  * @param {Object} rating data.
  * @returns {Object} Votes action.
  */
-export function vote() {
-  return {
-    type: VOTE,
-    request: {
-      op: 'post',
-      path: `/@votes`,
-    },
-  };
+export function vote(url, vote) {
+  if ([-1, 0, 1].includes(vote)) {
+    return {
+      type: VOTE,
+      request: {
+        op: 'post',
+        path: `${url}/@votes`,
+        data: { rating: vote },
+      },
+    };
+  }
 }
 
 /**
- * Delete group function.
+ * Delete votes of an item
  * @function clearVotes
  * @returns {Object} Votes action.
  */
-export function clearVotes() {
+export function clearVotes(url) {
   return {
     type: CLEAR_VOTES,
     request: {
       op: 'del',
-      path: `/@votes`,
+      path: `${url}/@votes`,
     },
   };
 }
