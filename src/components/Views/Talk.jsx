@@ -1,6 +1,13 @@
 import React from 'react';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { Container, Header, Image, Label, Segment } from 'semantic-ui-react';
+import {
+  Container,
+  Divider,
+  Header,
+  Image,
+  Label,
+  Segment,
+} from 'semantic-ui-react';
 import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
 import { Voting } from '~/components';
@@ -41,19 +48,23 @@ const TalkView = ({ content }) => {
           </>
         )}
         {content.audience && (
-          <Header dividing sub>
-            Audience
-          </Header>
+          <>
+            <Header dividing sub>
+              Audience
+            </Header>
+            <p>
+              {content.audience?.map((item) => {
+                let audience = item.title;
+                let color = color_mapping[audience] || 'green';
+                return (
+                  <Label key={audience} color={color} tag>
+                    {audience}
+                  </Label>
+                );
+              })}
+            </p>
+          </>
         )}
-        {content.audience?.map((item) => {
-          let audience = item.title;
-          let color = color_mapping[audience] || 'green';
-          return (
-            <Label key={audience} color={color}>
-              {audience}
-            </Label>
-          );
-        })}
       </Segment>
       {content.description && (
         <p className="documentDescription">{content.description}</p>
@@ -61,8 +72,9 @@ const TalkView = ({ content }) => {
       {content.details && (
         <div dangerouslySetInnerHTML={{ __html: content.details.data }} />
       )}
+      <Divider clearing hidden />
       {content.speaker && (
-        <Segment clearing>
+        <Segment>
           <Header dividing>{content.speaker}</Header>
           {content.website ? (
             <p>

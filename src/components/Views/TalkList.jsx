@@ -32,50 +32,43 @@ const TalkListView = ({ content }) => {
   }, [dispatch]);
 
   return (
-    <Container className="view-wrapper">
-      <article id="content">
-        <header>
-          <h1 className="documentFirstHeading">{content.title}</h1>
-          {content.description && (
-            <p className="documentDescription">{content.description}</p>
-          )}
-        </header>
-        <section id="content-core">
-          {talks &&
-            talks.map((item) => (
-              <Segment padded>
-                <h2>
-                  <Link to={item['@id']} title={item['@type']}>
-                    {item.type_of_talk?.title || item.type_of_talk?.token}:{' '}
-                    {item.title}
-                  </Link>
-                </h2>
-                {item.audience.map((item) => {
-                  let audience = item.title || item.token;
-                  let color = color_mapping[audience] || 'green';
-                  return (
-                    <Label key={audience} color={color}>
-                      {audience}
-                    </Label>
-                  );
-                })}
-                {item.image && (
-                  <Image
-                    src={flattenToAppURL(item.image.scales.preview.download)}
-                    size="small"
-                    floated="right"
-                    alt={content.image_caption}
-                    avatar
-                  />
-                )}
-                {item.description && <div>{item.description}</div>}
-                <Link to={item['@id']} title={item['@type']}>
-                  read more ...
-                </Link>
-              </Segment>
-            ))}
-        </section>
-      </article>
+    <Container id="page-document">
+      <h1 className="documentFirstHeading">{content.title}</h1>
+      {content.description && (
+        <p className="documentDescription">{content.description}</p>
+      )}
+      {talks &&
+        talks.map((item) => (
+          <Segment padded clearing>
+            <h2>
+              <Link to={item['@id']} title={item['@type']}>
+                {item.type_of_talk?.title || item.type_of_talk?.token}:{' '}
+                {item.title}
+              </Link>
+            </h2>
+            <p>
+              {item.audience.map((item) => {
+                let audience = item.title || item.token;
+                let color = color_mapping[audience] || 'green';
+                return (
+                  <Label key={audience} color={color} tag>
+                    {audience}
+                  </Label>
+                );
+              })}
+            </p>
+            {item.image && (
+              <Image
+                src={flattenToAppURL(item.image.scales.preview.download)}
+                size="small"
+                floated="right"
+                alt={content.image_caption}
+                avatar
+              />
+            )}
+            {item.description && <p>{item.description}</p>}
+          </Segment>
+        ))}
     </Container>
   );
 };
