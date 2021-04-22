@@ -10,6 +10,7 @@
  */
 import TalkView from './Views/Talk';
 import TalkListView from './Views/TalkList';
-import Sponsors from './Views/Sponsors';
+import Sponsors from './Sponsors/Sponsors';
+import Voting from './Voting/Voting';
 
-export { Sponsors, TalkView, TalkListView };
+export { Sponsors, TalkView, TalkListView, Voting };

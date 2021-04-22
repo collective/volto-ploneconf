@@ -1,10 +1,18 @@
 import React from 'react';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { Container, Header, Image, Label, Segment } from 'semantic-ui-react';
+import {
+  Container,
+  Divider,
+  Header,
+  Image,
+  Label,
+  Segment,
+} from 'semantic-ui-react';
 import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
-const TalkView = (props) => {
-  const { content } = props;
+import { Voting } from '~/components';
+
+const TalkView = ({ content }) => {
   const color_mapping = {
     Beginner: 'green',
     Advanced: 'yellow',
@@ -17,6 +25,7 @@ const TalkView = (props) => {
         {content.type_of_talk.title || content.type_of_talk.token}:{' '}
         {content.title}
       </h1>
+      <Voting />
       <Segment floated="right">
         {content.start && !content.hide_date && (
           <>
@@ -32,19 +41,23 @@ const TalkView = (props) => {
           </>
         )}
         {content.audience && (
-          <Header dividing sub>
-            Audience
-          </Header>
+          <>
+            <Header dividing sub>
+              Audience
+            </Header>
+            <div>
+              {content.audience?.map((item) => {
+                let audience = item.title;
+                let color = color_mapping[audience] || 'green';
+                return (
+                  <Label key={audience} color={color} tag>
+                    {audience}
+                  </Label>
+                );
+              })}
+            </div>
+          </>
         )}
-        {content.audience?.map((item) => {
-          let audience = item.title;
-          let color = color_mapping[audience] || 'green';
-          return (
-            <Label key={audience} color={color}>
-              {audience}
-            </Label>
-          );
-        })}
       </Segment>
       {content.description && (
         <p className="documentDescription">{content.description}</p>
