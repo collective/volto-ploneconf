@@ -43,16 +43,23 @@ const Voting = () => {
     <Segment className="voting">
       <Header dividing>Conference Talk and Training Selection</Header>
       <List>
-        {votes?.has_votes ? (
-          <p>
-            <Label.Group size="medium">
+        <p>
+          <Label.Group size="medium">
+            {votes?.has_votes ? (
               <Label color="olive" ribbon>
-                Average vote for this {content.type_of_talk?.title}: {votes?.average_vote}
+                Average vote for this{' '}
+                {content.type_of_talk?.title.toLowerCase()}:{' '}
+                {votes?.average_vote}
                 <Label.Detail>( Votes Cast {votes?.total_votes} )</Label.Detail>
               </Label>
-            </Label.Group>
-          </p>
-        ) : null}
+            ) : (
+              <b>
+                There are no votes so far for this{' '}
+                {content.type_of_talk?.title.toLowerCase()}.
+              </b>
+            )}
+          </Label.Group>
+        </p>
 
         <Divider horizontal section>
           Vote
