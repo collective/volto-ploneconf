@@ -9,7 +9,6 @@ import {
   Label,
   List,
   Segment,
-  Transition,
 } from 'semantic-ui-react';
 
 import { getVotes, vote, clearVotes } from '~/actions';
