@@ -13,6 +13,7 @@
  * }
  */
 
+import VocabularyTermsWidget from '@plone/volto/components/manage/Widgets/VocabularyTermsWidget';
 import { TalkListView, TalkView } from './components';
 
 // All your imports required for the config here BEFORE this line
@@ -28,7 +29,12 @@ export default function applyConfig(config) {
     layoutViews: {
       ...config.views.layoutViews,
       talklist_view: TalkListView,
-    }
+    },
   };
+
+  config.widgets.id.types_of_talk = VocabularyTermsWidget;
+  config.widgets.id.audiences = VocabularyTermsWidget;
+  config.widgets.id.rooms = VocabularyTermsWidget;
+
   return config;
 }
