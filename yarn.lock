@@ -1797,10 +1797,10 @@
     pofile "1.0.10"
     razzle "3.4.5"
 
-"@plone/volto@14.0.0-alpha.18":
-  version "14.0.0-alpha.18"
-  resolved "https://registry.yarnpkg.com/@plone/volto/-/volto-14.0.0-alpha.18.tgz#f7c5d970875872461edb87e1b05ffd3ad38467f7"
-  integrity sha512-53q15V7+1/lXLt+nb26soCNHRUZoX3yDYu2Ae+gWC0JMNNNHhAgwa27DXVhSu8h6aQSoFkuxokIPxG/+ZrWiZA==
+"@plone/volto@14.0.0-alpha.19":
+  version "14.0.0-alpha.19"
+  resolved "https://registry.yarnpkg.com/@plone/volto/-/volto-14.0.0-alpha.19.tgz#7831acfb3fd1ceaf391ce489499067ea99e7df5b"
+  integrity sha512-PdoXR4JMTpjjvKZoyLA/umdupTgJLU5RnivXVLty98ho4s6MStCC0iRYfy44Z4KWW8nC8yrnyn7Qh7woPa8msA==
   dependencies:
     "@babel/plugin-proposal-export-default-from" "7.10.4"
     "@babel/plugin-proposal-export-namespace-from" "7.10.4"
