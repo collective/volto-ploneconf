@@ -28,7 +28,7 @@ const DefaultTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
               <div className="listing-body">
                 <h4>{item.title ? item.title : item.id}</h4>
                 {item.review_state === 'published' && (
-                  <p className="discreet">
+                  <p>
                     <FormattedDate date={item.effective} includeTime />
                   </p>
                 )}
