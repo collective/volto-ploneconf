@@ -23,7 +23,7 @@ import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 const NewsItemView = ({ content }) =>
   hasBlocksData(content) ? (
     <div id="page-document" className="ui container viewwrapper event-view">
-      {content.effective && (
+      {content.review_state === 'published' && content.effective && (
         <p>
           <FormattedDate date={content.effective} includeTime />
         </p>
