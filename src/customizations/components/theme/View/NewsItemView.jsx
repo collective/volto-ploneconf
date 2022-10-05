@@ -6,9 +6,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Image } from 'semantic-ui-react';
-import moment from 'moment';
-
-import { flattenToAppURL, flattenHTMLToAppURL } from '@plone/volto/helpers';
+import {
+  hasBlocksData,
+  flattenToAppURL,
+  flattenHTMLToAppURL,
+} from '@plone/volto/helpers';
+import { FormattedDate } from '@plone/volto/components';
+import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 
 /**
  * NewsItemView view component class.
@@ -16,43 +20,49 @@ import { flattenToAppURL, flattenHTMLToAppURL } from '@plone/volto/helpers';
  * @params {object} content Content object.
  * @returns {string} Markup of the component.
  */
-const NewsItemView = ({ content }) => (
-  <Container className="view-wrapper">
-    {content.title && (
-      <h1 className="documentFirstHeading">
-        {content.title}
-        {content.subtitle && ` - ${content.subtitle}`}
-      </h1>
-    )}
-    {content.description && (
-      <p className="documentDescription">{content.description}</p>
-    )}
-    {content.image && (
-      <Image
-        className="documentImage"
-        alt={content.title}
-        title={content.title}
-        src={
-          content.image['content-type'] === 'image/svg+xml'
-            ? flattenToAppURL(content.image.download)
-            : flattenToAppURL(content.image.scales.mini.download)
-        }
-        floated="right"
-      />
-    )}
-    <p className="discreet">
-      {(content.effective && moment(content.effective).format('ll')) ||
-        moment(content.created).format('ll')}
-    </p>
-    {content.text && (
-      <div
-        dangerouslySetInnerHTML={{
-          __html: flattenHTMLToAppURL(content.text.data),
-        }}
-      />
-    )}
-  </Container>
-);
+const NewsItemView = ({ content }) =>
+  hasBlocksData(content) ? (
+    <div id="page-document" className="ui container viewwrapper event-view">
+      {content.effective && (
+        <p>
+          <FormattedDate date={content.effective} includeTime />
+        </p>
+      )}
+      <RenderBlocks content={content} />
+    </div>
+  ) : (
+    <Container className="view-wrapper">
+      {content.title && (
+        <h1 className="documentFirstHeading">
+          {content.title}
+          {content.subtitle && ` - ${content.subtitle}`}
+        </h1>
+      )}
+      {content.description && (
+        <p className="documentDescription">{content.description}</p>
+      )}
+      {content.image && (
+        <Image
+          className="documentImage"
+          alt={content.title}
+          title={content.title}
+          src={
+            content.image['content-type'] === 'image/svg+xml'
+              ? flattenToAppURL(content.image.download)
+              : flattenToAppURL(content.image.scales.mini.download)
+          }
+          floated="right"
+        />
+      )}
+      {content.text && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: flattenHTMLToAppURL(content.text.data),
+          }}
+        />
+      )}
+    </Container>
+  );
 
 /**
  * Property types.
