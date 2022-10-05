@@ -19,6 +19,12 @@ import { TalkListView, TalkView } from './components';
 import '@plone/volto/config';
 
 export default function applyConfig(config) {
+  // config.settings = {
+  //   ...config.settings,
+  //   supportedLanguages: ['en', 'de'],
+  //   defaultLanguage: 'de',
+  // };
+
   config.views = {
     ...config.views,
     contentTypesViews: {
@@ -28,7 +34,7 @@ export default function applyConfig(config) {
     layoutViews: {
       ...config.views.layoutViews,
       talklist_view: TalkListView,
-    }
+    },
   };
   return config;
 }
