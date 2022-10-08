@@ -18,6 +18,11 @@ import { TalkListView, TalkView } from './components';
 // All your imports required for the config here BEFORE this line
 import '@plone/volto/config';
 
+/**
+ * app configuration
+ * @param {Object} config Volto configuration
+ * @returns config Object
+ */
 export default function applyConfig(config) {
   // config.settings = {
   //   ...config.settings,
