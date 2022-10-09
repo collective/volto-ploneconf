@@ -10,7 +10,7 @@ import {
 } from 'semantic-ui-react';
 import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
-import { Voting } from '~/components';
+import { Voting } from 'volto-training-votable/components';
 
 const TalkView = ({ content }) => {
   const color_mapping = {
