@@ -1,0 +1,57 @@
+
+
+// Sponsors
+.ui.segment.sponsors {
+  background-color: rgb(177, 192, 219);
+  box-shadow: 0px 6px 24px 0px rgba(153, 153, 153, 0.3);
+  .sponsorheader {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    align-items: baseline;
+    justify-content: center;
+    .headline {
+      margin: 0 0 0 1em;
+    }
+    .subheadline {
+      margin: 0;
+    }
+  }
+  .sponsorlevel {
+    margin-top: 1rem;
+    display: flex;
+    h3 {
+      writing-mode: vertical-lr;
+      margin: 0 1em 0 0;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      cursor: default;
+    }
+    div.list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      .sponsor {
+        margin: 0 1rem 0.5rem 0;
+        .logo,
+        img {
+          height: 100%;
+          width: auto;
+        }
+      }
+    }
+    .sponsor {
+      height: 6rem;
+    }
+    &.platinum .sponsor {
+      height: 10rem;
+    }
+    &.gold .sponsor {
+      height: 8rem;
+    }
+    &.silver .sponsor {
+      height: 7rem;
+    }
+  }
+}
