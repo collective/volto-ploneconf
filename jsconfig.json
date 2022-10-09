@@ -1,10 +1,6 @@
 {
     "compilerOptions": {
-        "paths": {
-            "volto-training-votable": [
-                "addons/volto-training-votable/src"
-            ]
-        },
+        "paths": {},
         "baseUrl": "src"
     }
 }

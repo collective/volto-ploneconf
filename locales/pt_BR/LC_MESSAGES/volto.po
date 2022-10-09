@@ -16,5 +16,3 @@ msgstr ""
 "Language-Code: pt-br\n"
 "Language-Name: Português do Brasil\n"
 "Preferred-Encodings: utf-8\n"
-
-

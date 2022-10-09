@@ -1,24 +1,56 @@
-This Volto app is part of the Plone training ["Mastering Plone development"](https://training.plone.org/5/mastering-plone/index.html) 
+## Documentation
 
+A training on how to create your own website using Volto is available as part of the Plone training at [https://training.plone.org/5/volto/index.html](https://training.plone.org/5/volto/index.html).
 
-**Mastering Plone Development Training** is both: an online training and a handout for on-site trainings. We address developers. You are interested in best practice guides and want to learn the why and where, so read on!
+## Quick Start
 
-### Contributors
+Below is a list of commands you will probably find useful.
 
-Katja Süß @ksuess  
-Philip Bauer @pbauer  
-Janina Hard @wkbkhard  
+### `yarn start`
 
+Runs the project in development mode.
+You can view your application at `http://localhost:3000`
 
-## Installation
+The page will reload if you make edits.
 
-As this app is part of the Plone training ["Mastering Plone development"](https://training.plone.org/5/mastering-plone/index.html), see instructions on training docu.
+### `yarn build`
 
-## Contribute
+Builds the app for production to the build folder.
 
-As this app is part of the Plone training ["Mastering Plone development"](https://training.plone.org/5/mastering-plone/index.html), please file issues on ["Mastering Plone development"](https://training.plone.org/5/mastering-plone/index.html)
+The build is minified and the filenames include the hashes.
+Your app is ready to be deployed!
 
+### `yarn start:prod`
 
-## Licence
+Runs the compiled app in production.
 
-Feel free to use with mentioning the [Plone Foundation](https://plone.org/foundation). 
+You can again view your application at `http://localhost:3000`
+
+### `yarn test`
+
+Runs the test watcher (Jest) in an interactive mode.
+By default, runs tests related to files changed since the last commit.
+
+### `yarn i18n`
+
+Runs the test i18n runner which extracts all the translation strings and
+generates the needed files.
+
+### mrs-developer
+
+[mrs-developer](https://github.com/collective/mrs-developer) is a great tool
+for developing multiple packages at the same time.
+
+mrs-developer should work with this project by running the configured shortcut script:
+
+```bash
+yarn develop
+```
+
+Volto's latest razzle config will pay attention to your tsconfig.json (or jsconfig.json) file for any customizations.
+
+In case you don't want (or can't) install mrs-developer globally, you can install it in this project by running:
+
+```bash
+yarn add -W mrs-developer
+```
