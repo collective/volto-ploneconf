@@ -1,0 +1,5 @@
+{
+  "volto-training-votable": {
+    "local": "addons/volto-training-votable/src"
+  }
+}
