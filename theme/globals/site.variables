@@ -1,0 +1,3 @@
+@importGoogleFonts : true;
+@fontName : 'Lato';
+@emSize: 18px;
