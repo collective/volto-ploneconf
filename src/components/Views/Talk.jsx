@@ -1,14 +1,54 @@
 import React from 'react';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { Container, Image, Segment } from 'semantic-ui-react';
+import { Container, Header, Image, Label, Segment } from 'semantic-ui-react';
+import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
 const TalkView = ({ content }) => {
+  const color_mapping = {
+    Beginner: 'green',
+    Advanced: 'yellow',
+    Professional: 'purple',
+  };
+
   return (
     <Container id="view-wrapper talk-view">
       <h1 className="documentFirstHeading">
         {content.type_of_talk.title || content.type_of_talk.token}:{' '}
         {content.title}
       </h1>
+      <Segment floated="right">
+        {content.start && !content.hide_date && (
+          <>
+            <Header dividing sub>
+              When
+            </Header>
+            <When
+              start={content.start}
+              end={content.end}
+              whole_day={content.whole_day}
+              open_end={content.open_end}
+            />
+          </>
+        )}
+        {content.audience && (
+          <>
+            <Header dividing sub>
+              Audience
+            </Header>
+            <div>
+              {content.audience?.map((item) => {
+                let audience = item.title;
+                let color = color_mapping[audience] || 'green';
+                return (
+                  <Label key={audience} color={color} tag>
+                    {audience}
+                  </Label>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </Segment>
       {content.description && (
         <p className="documentDescription">{content.description}</p>
       )}
