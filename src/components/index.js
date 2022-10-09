@@ -8,6 +8,7 @@
  *   Footer,
  * };
  */
- import TalkView from './Views/Talk';
- 
- export { TalkView };
+import TalkView from './Views/Talk';
+import Sponsors from './Sponsors/Sponsors';
+
+export { Sponsors, TalkView };
