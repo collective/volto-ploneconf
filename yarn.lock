@@ -1844,9 +1844,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^2.88.11":
-  version: 2.88.12
-  resolution: "@cypress/request@npm:2.88.12"
+"@cypress/request@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "@cypress/request@npm:3.0.1"
   dependencies:
     aws-sign2: ~0.7.0
     aws4: ^1.8.0
@@ -1861,12 +1861,12 @@ __metadata:
     json-stringify-safe: ~5.0.1
     mime-types: ~2.1.19
     performance-now: ^2.1.0
-    qs: ~6.10.3
+    qs: 6.10.4
     safe-buffer: ^5.1.2
     tough-cookie: ^4.1.3
     tunnel-agent: ^0.6.0
     uuid: ^8.3.2
-  checksum: 2c6fbf7f3127d41bffca8374beaa8cf95450495a8a077b00309ea9d94dd2a4da450a77fe038e8ad26c97cdd7c39b65c53c850f8338ce9bc2dbe23ce2e2b48329
+  checksum: 7175522ebdbe30e3c37973e204c437c23ce659e58d5939466615bddcd58d778f3a8ea40f087b965ae8b8138ea8d102b729c6eb18c6324f121f3778f4a2e8e727
   languageName: node
   linkType: hard
 
@@ -2805,9 +2805,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@plone/volto@npm:17.0.0-alpha.25":
-  version: 17.0.0-alpha.25
-  resolution: "@plone/volto@npm:17.0.0-alpha.25"
+"@plone/volto@npm:17.0.0-alpha.26":
+  version: 17.0.0-alpha.26
+  resolution: "@plone/volto@npm:17.0.0-alpha.26"
   dependencies:
     "@babel/core": ^7.0.0
     "@babel/plugin-proposal-export-default-from": 7.18.9
@@ -2841,8 +2841,8 @@ __metadata:
     connected-react-router: 6.8.0
     crypto-random-string: 3.2.0
     css-loader: 5.2.7
-    cypress: 12.17.1
-    cypress-axe: 1.4.0
+    cypress: 13.1.0
+    cypress-axe: 1.5.0
     cypress-file-upload: 5.0.8
     debug: 4.3.2
     decorate-component-with-props: 1.2.1
@@ -2987,7 +2987,7 @@ __metadata:
     webpack-node-externals: 3.0.0
     xmlrpc: 1.3.2
     yarnhook: 0.5.1
-  checksum: 72b7c7676878bd8543e1102de927bf945ca6f8ebcfaa79af76f9dad266c2f94fd8760c8a3986b2c45bd20d37686140ee533028c6adb17e4c7669cadc07e44f34
+  checksum: 717434a917978dbd84063518d867ea8e36826cc8a0a7f5568deb6332f86aa47e788194c0fb6848f33b444e08c8f91a3c11b71a5987b0d9e0ba1e12c5659f640a
   languageName: node
   linkType: hard
 
@@ -5023,10 +5023,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.14.31":
-  version: 14.18.54
-  resolution: "@types/node@npm:14.18.54"
-  checksum: 9fd66f91fcd8e9b25067f784a9c60bd710ef86a89c838c131ab2b1921398adc53b1c70d741bceed48bb2403b75c434b1bbbb255240773819cde36295c4b6abf1
+"@types/node@npm:^16.18.39":
+  version: 16.18.54
+  resolution: "@types/node@npm:16.18.54"
+  checksum: 208e8fc64f605e9cd55ab5e620a0fd019d8fe5629e3e3c5de869a149b731ab0fac5720c516dccc0ecc834ac27df754723dfe6554551663f016ba5096ea8851df
   languageName: node
   linkType: hard
 
@@ -9315,13 +9315,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress-axe@npm:1.4.0":
-  version: 1.4.0
-  resolution: "cypress-axe@npm:1.4.0"
+"cypress-axe@npm:1.5.0":
+  version: 1.5.0
+  resolution: "cypress-axe@npm:1.5.0"
   peerDependencies:
     axe-core: ^3 || ^4
-    cypress: ^10 || ^11 || ^12
-  checksum: b202de37c38aab899a9bb0f813069221bc14a9a76e1f3998595f7097d9296efac8c7679c81279e20ce023b69bcc379657a4d5fcfa3da342826cb22eec7938ef2
+    cypress: ^10 || ^11 || ^12 || ^13
+  checksum: 7b5574da4ea2c1a1141f79cb4465a4f30879e30b9ac08da4aca935dfc7662d3fa170254be8c4eff26841bc065e6115bf6e6b8a8eee5ff7cb9812bbcbeb863ff2
   languageName: node
   linkType: hard
 
@@ -9334,13 +9334,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:12.17.1":
-  version: 12.17.1
-  resolution: "cypress@npm:12.17.1"
+"cypress@npm:13.1.0":
+  version: 13.1.0
+  resolution: "cypress@npm:13.1.0"
   dependencies:
-    "@cypress/request": ^2.88.11
+    "@cypress/request": ^3.0.0
     "@cypress/xvfb": ^1.2.4
-    "@types/node": ^14.14.31
+    "@types/node": ^16.18.39
     "@types/sinonjs__fake-timers": 8.1.1
     "@types/sizzle": ^2.3.2
     arch: ^2.2.0
@@ -9373,6 +9373,7 @@ __metadata:
     minimist: ^1.2.8
     ospath: ^1.2.2
     pretty-bytes: ^5.6.0
+    process: ^0.11.10
     proxy-from-env: 1.0.0
     request-progress: ^3.0.0
     semver: ^7.5.3
@@ -9382,7 +9383,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 1f042e3e5931498bdf826cba09060939349e677fca8654c9695760acbec5a424cb69d3445ace57cf80deb496d770ffe571ef791dff72af24e7f560ee43986ee4
+  checksum: 238057b288f54401ad3fa8693c31ec08eef2d98a7fc93ce7f60bc009fcae18539e84be4c1cd41526816603f642f63444a7adce9d914b1338a53c0bf756bdb762
   languageName: node
   linkType: hard
 
@@ -19077,6 +19078,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:6.10.4":
+  version: 6.10.4
+  resolution: "qs@npm:6.10.4"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 31e4fedd759d01eae52dde6692abab175f9af3e639993c5caaa513a2a3607b34d8058d3ae52ceeccf37c3025f22ed5e90e9ddd6c2537e19c0562ddd10dc5b1eb
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
@@ -19099,15 +19109,6 @@ __metadata:
   dependencies:
     side-channel: ^1.0.4
   checksum: e812f3c590b2262548647d62f1637b6989cc56656dc960b893fe2098d96e1bd633f36576f4cd7564dfbff9db42e17775884db96d846bebe4f37420d073ecdc0b
-  languageName: node
-  linkType: hard
-
-"qs@npm:~6.10.3":
-  version: 6.10.5
-  resolution: "qs@npm:6.10.5"
-  dependencies:
-    side-channel: ^1.0.4
-  checksum: b3873189a11bcf48445864b3ba66f7a76db0d9d874955d197779f561addfa604884f7b107971526ce1eca02c99bf7d1e47f28a3e7e6e29204d798fb279164226
   languageName: node
   linkType: hard
 
@@ -24391,7 +24392,7 @@ __metadata:
   resolution: "volto-ploneconf@workspace:."
   dependencies:
     "@plone/scripts": ^2.1.5
-    "@plone/volto": 17.0.0-alpha.25
+    "@plone/volto": 17.0.0-alpha.26
     "@storybook/addon-actions": ^6.3.0
     "@storybook/addon-controls": 6.3.0
     "@storybook/addon-essentials": ^6.3.0
