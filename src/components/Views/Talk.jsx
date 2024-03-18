@@ -5,9 +5,9 @@ import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 
 const TalkView = ({ content }) => {
   const color_mapping = {
-    Beginner: 'green',
-    Advanced: 'yellow',
-    Professional: 'purple',
+    beginner: 'green',
+    advanced: 'yellow',
+    professional: 'purple',
   };
 
   return (
