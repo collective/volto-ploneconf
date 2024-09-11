@@ -1,8 +1,10 @@
 import {
   Container as SemanticContainer,
   Header,
+  Image,
   Segment,
 } from 'semantic-ui-react';
+import { flattenToAppURL } from '@plone/volto/helpers';
 import config from '@plone/volto/registry';
 
 const TalkView = (props) => {
@@ -27,6 +29,13 @@ const TalkView = (props) => {
             Email: <a href={`mailto:${content.email}`}>{content.email}</a>
           </p>
         )}
+        <Image
+          src={flattenToAppURL(content.image?.scales?.preview?.download)}
+          size="small"
+          floated="right"
+          alt={content.speaker}
+          avatar
+        />
         {content.speaker_biography && (
           <div
             dangerouslySetInnerHTML={{
