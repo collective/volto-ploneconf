@@ -6,6 +6,7 @@ import {
   Segment,
 } from 'semantic-ui-react';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
 import config from '@plone/volto/registry';
 
 const TalkView = (props) => {
@@ -26,14 +27,35 @@ const TalkView = (props) => {
       {content.description && (
         <p className="documentDescription">{content.description}</p>
       )}
-      {content.audience?.map((item) => {
-        let color = color_mapping[item.token] || 'green';
-        return (
-          <Label key={item.token} color={color}>
-            {item.token}
-          </Label>
-        );
-      })}
+      <Segment floated="right">
+        {content.start && !content.hide_date && (
+          <>
+            <Header dividing sub>
+              When
+            </Header>
+            <When
+              start={content.start}
+              end={content.end}
+              whole_day={content.whole_day}
+              open_end={content.open_end}
+            />
+          </>
+        )}
+        {content.audience && (
+          <Header dividing sub>
+            Audience
+          </Header>
+        )}
+        {content.audience?.map((item) => {
+          let audience = item.title || item.token;
+          let color = color_mapping[audience] || 'green';
+          return (
+            <Label key={audience} color={color}>
+              {audience}
+            </Label>
+          );
+        })}
+      </Segment>
       <div dangerouslySetInnerHTML={{ __html: content.details.data }} />
       <Segment clearing>
         {content.speaker && <Header dividing>{content.speaker}</Header>}
