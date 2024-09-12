@@ -11,3 +11,8 @@ node_modules
 results
 yarn.lock
 /public
+backend/.venv/
+backend/instance/
+backend/constraints-mxdev.txt
+backend/requirements-mxdev.txt
+backend/sources/

@@ -14,6 +14,13 @@ context('Example Acceptance Tests', () => {
     it('As editor I can add edit a Page', function () {
       cy.visit('/document');
       cy.navigate('/document/edit');
+      cy.getSlateTitle()
+        .focus()
+        .click()
+        .clear()
+        .type('My test document{enter}')
+        .get('.documentFirstHeading')
+        .contains('My test document');
       cy.get('#toolbar-save').click();
     });
   });
