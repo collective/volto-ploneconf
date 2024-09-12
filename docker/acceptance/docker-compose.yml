@@ -1,0 +1,19 @@
+services:
+  backend-acceptance:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.acceptance
+      args:
+        PLONE_VERSION: ${PLONE_VERSION:-6.0}
+    environment:
+      ZSERVER_HOST: '0.0.0.0'
+      ZSERVER_PORT: '55001'
+      CONFIGURE_PACKAGES: 'plone.restapi,plone.volto,plone.volto.cors,ploneconf.site'
+      APPLY_PROFILES: 'ploneconf.site:default'
+    volumes:
+      - backend-data:/data
+    ports:
+      - 55001:55001
+
+volumes:
+  backend-data:

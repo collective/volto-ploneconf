@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a talk view component with only required props 1`] = `
+<div
+  className="ui container"
+  id="view-wrapper talk-view"
+>
+  <h1
+    className="documentFirstHeading"
+  >
+    <span
+      className="type_of_talk"
+    >
+      Talk
+      : 
+    </span>
+    Security of Plone
+  </h1>
+  <p
+    className="documentDescription"
+  >
+    What makes Plone secure?
+  </p>
+  <div
+    className="ui right floated segment"
+  />
+  <div
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<p>some details about this <strong>talk</strong>.</p>",
+      }
+    }
+  />
+  <div
+    className="ui clearing segment"
+  >
+    <div
+      className="ui dividing header"
+    >
+      Speaker
+    </div>
+  </div>
+</div>
+`;

@@ -22,11 +22,19 @@ YELLOW=`tput setaf 3`
 GIT_FOLDER=$(CURRENT_DIR)/.git
 PRE_COMMIT=pipx run --spec 'pre-commit==3.7.1' pre-commit
 
-PLONE_VERSION=6
+PLONE_VERSION=6.0
 DOCKER_IMAGE=plone/server-dev:${PLONE_VERSION}
 DOCKER_IMAGE_ACCEPTANCE=plone/server-acceptance:${PLONE_VERSION}
 
-ADDON_NAME='volto-ploneconf'
+ADDON_NAME='volto-ploneconf' # with scope if scope
+ADDON_PATH='volto-ploneconf'
+
+ACCEPTANCE_COMPOSE_FILE=docker/acceptance/docker-compose.yml
+CMD_ENVS=PLONE_VERSION=${PLONE_VERSION}
+CMD=${CMD_ENVS} docker compose
+PROJECT_NAME=${ADDON_PATH}
+ACCEPTANCE_COMPOSE=${CMD} -p ${PROJECT_NAME}-acceptance -f ${ACCEPTANCE_COMPOSE_FILE}
+
 
 .PHONY: help
 help: ## Show this help
@@ -50,10 +58,10 @@ start: ## Starts Volto, allowing reloading of the add-on during development
 build: ## Build a production bundle for distribution of the project with the add-on
 	pnpm build
 
-core/packages/registry/dist: core/packages/registry/src
+core/packages/registry/dist: $(shell find core/packages/registry/src -type f)
 	pnpm --filter @plone/registry build
 
-core/packages/components/dist: core/packages/components/src
+core/packages/components/dist: $(shell find core/packages/components/src -type f)
 	pnpm --filter @plone/components build
 
 .PHONY: build-deps
@@ -91,10 +99,10 @@ release-dry-run: ## Dry-run the release of the add-on on npmjs.org
 test: ## Run unit tests
 	pnpm test
 
-.PHONY: test-ci
+.PHONY: ci-test
 ci-test: ## Run unit tests in CI
 	# Unit Tests need the i18n to be built
-	VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto i18n
+	VOLTOCONFIG=$$(pwd)/volto.config.js pnpm --filter @plone/volto i18n
 	CI=1 RAZZLE_JEST_CONFIG=$(CURRENT_DIR)/jest-addon.config.js pnpm --filter @plone/volto test -- --passWithNoTests
 
 .PHONY: backend-docker-start
@@ -114,7 +122,9 @@ storybook-build: ## Build Storybook
 	mkdir -p $(CURRENT_DIR)/.storybook-build
 	pnpm run storybook-build -o $(CURRENT_DIR)/.storybook-build
 
-## Acceptance
+###########################################
+# Acceptance
+###########################################
 .PHONY: acceptance-frontend-dev-start
 acceptance-frontend-dev-start: ## Start acceptance frontend in development mode
 	RAZZLE_API_PATH=http://127.0.0.1:55001/plone pnpm start
@@ -123,18 +133,30 @@ acceptance-frontend-dev-start: ## Start acceptance frontend in development mode
 acceptance-frontend-prod-start: ## Start acceptance frontend in production mode
 	RAZZLE_API_PATH=http://127.0.0.1:55001/plone pnpm build && pnpm start:prod
 
+# dev acceptance backend
+.PHONY: backend-install
+backend-install:  ## Create virtualenv and install Plone
+	$(MAKE) -C "./backend/" install
+
 .PHONY: acceptance-backend-start
 acceptance-backend-start: ## Start backend acceptance server
-	docker run -it --rm -p 55001:55001 $(DOCKER_IMAGE_ACCEPTANCE)
+	$(MAKE) -C "./backend/" acceptance-backend-start
+
+# CI acceptance backend
+.PHONY: acceptance-backend-build
+acceptance-backend-build: ## Build backend acceptance image
+	(cd docker/acceptance)
+	${ACCEPTANCE_COMPOSE} build --no-cache
 
 .PHONY: ci-acceptance-backend-start
 ci-acceptance-backend-start: ## Start backend acceptance server in headless mode for CI
-	docker run -i --rm -p 55001:55001 $(DOCKER_IMAGE_ACCEPTANCE)
+	${ACCEPTANCE_COMPOSE} up -d --force-recreate
 
+# run tests
 .PHONY: acceptance-test
 acceptance-test: ## Start Cypress in interactive mode
-	pnpm --filter @plone/volto exec cypress open --config-file $(CURRENT_DIR)/cypress.config.js --config specPattern=$(CURRENT_DIR)'/cypress/tests/**/*.{js,jsx,ts,tsx}'
+	VOLTOCONFIG=../../volto.config.js pnpm --filter @plone/volto exec cypress open --config-file $(CURRENT_DIR)/cypress.config.js --config specPattern=$(CURRENT_DIR)'/cypress/tests/**/*.{js,jsx,ts,tsx}'
 
 .PHONY: ci-acceptance-test
 ci-acceptance-test: ## Run cypress tests in headless mode for CI
-	pnpm --filter @plone/volto exec cypress run --config-file $(CURRENT_DIR)/cypress.config.js --config specPattern=$(CURRENT_DIR)'/cypress/tests/**/*.{js,jsx,ts,tsx}'
+	VOLTOCONFIG=$$(pwd)/volto.config.js pnpm --filter @plone/volto exec cypress run --config-file $(CURRENT_DIR)/cypress.config.js --config specPattern=$(CURRENT_DIR)'/cypress/tests/**/*.{js,jsx,ts,tsx}'
