@@ -21,7 +21,7 @@ const TalkView = (props) => {
   return (
     <Container id="view-wrapper talk-view">
       <h1 className="documentFirstHeading">
-        <span className="type_of_talk">{content.type_of_talk.token}: </span>
+        <span className="type_of_talk">{content.type_of_talk.title}: </span>
         {content.title}
       </h1>
       {content.description && (
@@ -41,20 +41,29 @@ const TalkView = (props) => {
             />
           </>
         )}
-        {content.audience && (
-          <Header dividing sub>
-            Audience
-          </Header>
+        {content.room && (
+          <>
+            <Header dividing sub>
+              Where
+            </Header>
+            <p>{content.room.title}</p>
+          </>
         )}
-        {content.audience?.map((item) => {
-          let audience = item.title || item.token;
-          let color = color_mapping[audience] || 'green';
-          return (
-            <Label key={audience} color={color}>
-              {audience}
-            </Label>
-          );
-        })}
+        {content.audience && (
+          <>
+            <Header dividing sub>
+              Audience
+            </Header>
+            {content.audience?.map((item) => {
+              let color = color_mapping[item.token] || 'green';
+              return (
+                <Label key={item.token} color={color}>
+                  {item.title}
+                </Label>
+              );
+            })}
+          </>
+        )}
       </Segment>
       <div dangerouslySetInnerHTML={{ __html: content.details.data }} />
       <Segment clearing>
