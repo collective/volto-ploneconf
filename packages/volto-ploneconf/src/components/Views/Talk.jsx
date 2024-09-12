@@ -2,6 +2,7 @@ import {
   Container as SemanticContainer,
   Header,
   Image,
+  Label,
   Segment,
 } from 'semantic-ui-react';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -11,6 +12,11 @@ const TalkView = (props) => {
   const { content } = props;
   const Container =
     config.getComponent({ name: 'Container' }).component || SemanticContainer;
+  const color_mapping = {
+    beginner: 'green',
+    advanced: 'yellow',
+    professional: 'purple',
+  };
   return (
     <Container id="view-wrapper talk-view">
       <h1 className="documentFirstHeading">
@@ -20,13 +26,45 @@ const TalkView = (props) => {
       {content.description && (
         <p className="documentDescription">{content.description}</p>
       )}
+      {content.audience?.map((item) => {
+        let color = color_mapping[item.token] || 'green';
+        return (
+          <Label key={item.token} color={color}>
+            {item.token}
+          </Label>
+        );
+      })}
       <div dangerouslySetInnerHTML={{ __html: content.details.data }} />
       <Segment clearing>
         {content.speaker && <Header dividing>{content.speaker}</Header>}
-        <p>{content.company || content.website}</p>
+        {content.website ? (
+          <p>
+            <a href={content.website}>{content.company || content.website}</a>
+          </p>
+        ) : (
+          <p>{content.company}</p>
+        )}
         {content.email && (
           <p>
             Email: <a href={`mailto:${content.email}`}>{content.email}</a>
+          </p>
+        )}
+        {content.twitter && (
+          <p>
+            X:{' '}
+            <a href={`https://x.com/${content.twitter}`}>
+              {content.twitter.startsWith('@')
+                ? content.twitter
+                : '@' + content.twitter}
+            </a>
+          </p>
+        )}
+        {content.github && (
+          <p>
+            Github:{' '}
+            <a href={`https://github.com/${content.github}`}>
+              {content.github}
+            </a>
           </p>
         )}
         <Image
