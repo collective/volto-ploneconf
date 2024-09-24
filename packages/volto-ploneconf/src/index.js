@@ -1,4 +1,4 @@
-import { TalkView } from './components';
+import { TalkView, TalkListingBlockVariation } from './components';
 
 const applyConfig = (config) => {
   config.views = {
@@ -8,6 +8,16 @@ const applyConfig = (config) => {
       talk: TalkView,
     },
   };
+
+  config.blocks.blocksConfig.listing.variations = [
+    ...config.blocks.blocksConfig.listing.variations,
+    {
+      id: 'talks',
+      title: 'Talks',
+      template: TalkListingBlockVariation,
+    },
+  ];
+
   return config;
 };
 
