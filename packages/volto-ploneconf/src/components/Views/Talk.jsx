@@ -1,12 +1,16 @@
+import { isEmpty } from 'lodash';
 import {
   Container as SemanticContainer,
+  Grid,
   Header,
   Image,
   Label,
   Segment,
 } from 'semantic-ui-react';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import { Component, UniversalLink } from '@plone/volto/components';
 import { When } from '@plone/volto/components/theme/View/EventDatesInfo';
+import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
 import config from '@plone/volto/registry';
 
 const TalkView = (props) => {
@@ -28,6 +32,13 @@ const TalkView = (props) => {
         <p className="documentDescription">{content.description}</p>
       )}
       <Segment floated="right">
+        {content.image?.scales && (
+          <Image
+            src={flattenToAppURL(content.image?.scales?.preview?.download)}
+            size="medium"
+            alt={content.title}
+          />
+        )}
         {content.start && !content.hide_date && (
           <>
             <Header dividing sub>
@@ -67,50 +78,41 @@ const TalkView = (props) => {
       </Segment>
       <div dangerouslySetInnerHTML={{ __html: content.details.data }} />
       <Segment clearing>
-        {content.speaker && <Header dividing>{content.speaker}</Header>}
-        {content.website ? (
-          <p>
-            <a href={content.website}>{content.company || content.website}</a>
-          </p>
-        ) : (
-          <p>{content.company}</p>
-        )}
-        {content.email && (
-          <p>
-            Email: <a href={`mailto:${content.email}`}>{content.email}</a>
-          </p>
-        )}
-        {content.twitter && (
-          <p>
-            X:{' '}
-            <a href={`https://x.com/${content.twitter}`}>
-              {content.twitter.startsWith('@')
-                ? content.twitter
-                : '@' + content.twitter}
-            </a>
-          </p>
-        )}
-        {content.github && (
-          <p>
-            Github:{' '}
-            <a href={`https://github.com/${content.github}`}>
-              {content.github}
-            </a>
-          </p>
-        )}
-        <Image
-          src={flattenToAppURL(content.image?.scales?.preview?.download)}
-          size="small"
-          floated="right"
-          alt={content.speaker}
-          avatar
-        />
-        {content.speaker_biography && (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: content.speaker_biography.data,
-            }}
-          />
+        <Header dividing>Speaker</Header>
+        {content.speaker?.length > 0 && (
+          <Grid>
+            <Grid.Row columns={5}>
+              {content.speaker.map((el) => (
+                <Grid.Column key={el['@id']}>
+                  <UniversalLink href={el['@id']}>
+                    {isEmpty(el.image_scales) ? (
+                      <img
+                        src={
+                          config.getComponent({
+                            name: 'DefaultImage',
+                            dependencies: ['listing', 'summary'],
+                          }).component || DefaultImageSVG
+                        }
+                        alt={el.title}
+                        className="ui image"
+                      />
+                    ) : (
+                      <Component
+                        componentName="PreviewImage"
+                        item={el}
+                        image_field={isEmpty(el.image_scales) ? null : 'image'}
+                        showDefault={true}
+                        alt={el.title}
+                        responsive={true}
+                        className="ui image"
+                      />
+                    )}
+                    <div>{el.title}</div>
+                  </UniversalLink>
+                </Grid.Column>
+              ))}
+            </Grid.Row>
+          </Grid>
         )}
       </Segment>
     </Container>
