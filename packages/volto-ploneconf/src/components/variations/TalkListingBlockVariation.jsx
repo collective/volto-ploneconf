@@ -38,7 +38,11 @@ const TalkListingBlockVariation = ({
           <Segment key={item['@id']}>
             <div className="listing-item">
               <ConditionalLink item={item} condition={!isEditMode}>
-                <Component componentName="PreviewImage" item={item} alt="" />
+                <Component
+                  componentName="PreviewImage"
+                  item={item}
+                  alt={item.title}
+                />
                 <div className="listing-body">
                   <When
                     start={item.start}
@@ -47,7 +51,9 @@ const TalkListingBlockVariation = ({
                     open_end={item.open_end}
                   />
                   <h3>{item.title || item.id}</h3>
-                  <p>{item.speaker}</p>
+                  {item.speaker?.length > 0 && (
+                    <p>{item.speaker.map((el) => el.title).join(', ')}</p>
+                  )}
                   <p>
                     {item.room && (
                       <>
