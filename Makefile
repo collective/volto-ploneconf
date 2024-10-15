@@ -22,19 +22,15 @@ YELLOW=`tput setaf 3`
 GIT_FOLDER=$(CURRENT_DIR)/.git
 PRE_COMMIT=pipx run --spec 'pre-commit==3.7.1' pre-commit
 
-PLONE_VERSION=6
-VOLTO_VERSION=18
+PLONE_VERSION=6.0
 DOCKER_IMAGE=plone/server-dev:${PLONE_VERSION}
 DOCKER_IMAGE_ACCEPTANCE=plone/server-acceptance:${PLONE_VERSION}
 
-ADDON_NAME='volto-ploneconf'
+ADDON_NAME='volto-ploneconf' # with scope if scope
 ADDON_PATH='volto-ploneconf'
 
-KGS=plone.restapi==9.7.2 plone.volto==4.4.3 plone.rest==4.1.3
-TESTING_ADDONS=plone.app.robotframework==2.1.3 plone.app.testing==7.1.0
-BACKEND_ADDONS='collective.elastic.plone ${KGS} $(TESTING_ADDONS)'
 ACCEPTANCE_COMPOSE=docker/acceptance/docker-compose.yml
-CMD_ENVS=CURRENT_DIR=${CURRENT_DIR} ADDON_NAME=${ADDON_NAME} ADDON_PATH=${ADDON_PATH} VOLTO_VERSION=${VOLTO_VERSION} PLONE_VERSION=${PLONE_VERSION} BACKEND_ADDONS=${BACKEND_ADDONS}
+CMD_ENVS=PLONE_VERSION=${PLONE_VERSION}
 CMD=${CMD_ENVS} docker compose
 PROJECT_NAME=${ADDON_PATH}
 ACCEPTANCE=${CMD} -p ${PROJECT_NAME}-acceptance -f ${ACCEPTANCE_COMPOSE}
@@ -135,26 +131,18 @@ acceptance-frontend-dev-start: ## Start acceptance frontend in development mode
 acceptance-frontend-prod-start: ## Start acceptance frontend in production mode
 	RAZZLE_API_PATH=http://127.0.0.1:55001/plone pnpm build && pnpm start:prod
 
-# .PHONY: acceptance-backend-start
-# acceptance-backend-start: ## Start backend acceptance server
-# 	docker run -it --rm -p 55001:55001 $(DOCKER_IMAGE_ACCEPTANCE)
-
-# .PHONY: ci-acceptance-backend-start
-# ci-acceptance-backend-start: ## Start backend acceptance server in headless mode for CI
-# 	docker run -i --rm -p 55001:55001 $(DOCKER_IMAGE_ACCEPTANCE)
-
-.PHONY: build-acceptance
-build-acceptance: ## Build backend acceptance image
+.PHONY: acceptance-backend-build
+acceptance-backend-build: ## Build backend acceptance image
 	(cd docker/acceptance)
-	${ACCEPTANCE} --profile dev build --no-cache
+	${ACCEPTANCE} build --no-cache
 
-.PHONY: start-acceptance-containers
-start-acceptance: ## Start backend acceptance image
-	${ACCEPTANCE} --profile dev up -d --force-recreate
+.PHONY: acceptance-backend-start
+acceptance-backend-start: ## Start backend acceptance server
+	${ACCEPTANCE} up -d --force-recreate
 
-
-# TODO CI acceptance
-
+.PHONY: ci-acceptance-backend-start
+ci-acceptance-backend-start: ## Start backend acceptance server in headless mode for CI
+	make acceptance-backend-start
 
 .PHONY: acceptance-test
 acceptance-test: ## Start Cypress in interactive mode

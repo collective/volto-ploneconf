@@ -12,7 +12,7 @@ Start backend:
 
 ```shell
 make build-acceptance
-make start-acceptance
+make acceptance-backend-start
 ```
 
 Run tests
