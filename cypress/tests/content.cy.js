@@ -22,9 +22,9 @@ describe('Add talk tests', () => {
     cy.get('.field-wrapper-details .slate-editor').type('This is the text.');
     cy.get('#toolbar-save').click();
 
-    // then a new talk should have been created
+    // Then a new talk should have been created
     cy.url().should('eq', Cypress.config().baseUrl + '/security-in-plone');
-    // then the title should read 'Talk: Security in Plone' with the type of talk mentioned
+    // Then the title should read 'Talk: Security in Plone' with the type of talk mentioned
     cy.get('body').contains('Talk: Security in Plone');
   });
 });
