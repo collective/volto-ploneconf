@@ -1,0 +1,33 @@
+# syntax=docker/dockerfile:1
+# Dockerfile from cookiecutter-plone-starter
+
+ARG PLONE_VERSION=6.0
+ARG SEED=1
+FROM plone/server-builder:${PLONE_VERSION} as builder
+
+WORKDIR /app
+
+# # Add local code
+# COPY . .
+
+# Install local requirements
+RUN <<EOT
+    SEED=${SEED}
+    set -e
+    bin/pip install plone.app.robotframework>=2.0.0
+    # TODO Switch back to released ploneconf.site
+    # bin/pip install ploneconf.site>=2.1.0
+    bin/pip install 'ploneconf.site @ git+https://github.com/collective/ploneconf.site.git'
+EOT
+
+
+FROM plone/server-acceptance:${PLONE_VERSION}
+ENV APPLY_PROFILES="ploneconf.site:default"
+
+# Copy /app from builder
+COPY --from=builder /app /app
+
+RUN <<EOT
+    SEED=${SEED}
+    ln -s /data /app/var
+EOT

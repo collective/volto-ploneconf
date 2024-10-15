@@ -8,23 +8,23 @@ describe('Add talk tests', () => {
     // when I add a talk with title, type and details
     cy.get('#toolbar-add').click();
     cy.get('#toolbar-add-talk').click();
+    // title
     cy.get('input[name="title"]')
       .type('Security in Plone')
       .should('have.value', 'Security in Plone');
+    // type of talk
     cy.get(
-      '#default-type_of_talk .react-select-container > .react-select__control .icon',
+      '#field-type_of_talk > .react-select__control > .react-select__value-container',
     )
       .click()
-      .type('Talk{enter}');
-    cy.get('#default-details .public-DraftEditor-content')
-      .type('This is the text.')
-      .get('span[data-text]')
-      .contains('This is the text.');
+      .type('talk{enter}');
+    // details
+    cy.get('.field-wrapper-details .slate-editor').type('This is the text.');
     cy.get('#toolbar-save').click();
 
     // then a new talk should have been created
     cy.url().should('eq', Cypress.config().baseUrl + '/security-in-plone');
-    cy.get('body').contains('Security in Plone');
-    cy.get('body').contains('This is the text.');
+    // then the title should read 'Talk: Security in Plone' with the type of talk mentioned
+    cy.get('body').contains('Talk: Security in Plone');
   });
 });
