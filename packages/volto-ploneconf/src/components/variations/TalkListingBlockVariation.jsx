@@ -35,8 +35,8 @@ const TalkListingBlockVariation = ({
     <>
       <div className="items">
         {items.map((item) => (
-          <Segment>
-            <div className="listing-item" key={item['@id']}>
+          <Segment key={item['@id']}>
+            <div className="listing-item">
               <ConditionalLink item={item} condition={!isEditMode}>
                 <Component
                   componentName="PreviewImage"

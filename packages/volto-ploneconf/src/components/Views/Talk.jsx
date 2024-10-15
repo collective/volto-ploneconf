@@ -83,7 +83,7 @@ const TalkView = (props) => {
           <Grid>
             <Grid.Row columns={5}>
               {content.speaker.map((el) => (
-                <Grid.Column>
+                <Grid.Column key={el['@id']}>
                   <UniversalLink href={el['@id']}>
                     {isEmpty(el.image_scales) ? (
                       <img
